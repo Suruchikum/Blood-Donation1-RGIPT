@@ -216,17 +216,18 @@
                     required><br>
 
                 <div class="safety" style="font-family: sans-serif; font-size: 20px;"></div> -->
-                <i class="fas fa-lock"></i>
+                <!-- <i class="fas fa-lock"></i>
                 <div style="position: relative; width: 100%;">
                     <input type="password" placeholder="Password" name="password" id="password_data" required
-                        style="width: calc(100% - 30px); padding-right: 30px;">
-                    <img src="./images/eye1.png" id="togglePassword"
-                        style="cursor: pointer; position: absolute; right: 3px; top: 20%;transform: translateY(-50%);"
-                        alt="Toggle Password Visibility">
-                </div><br>
+                        style="width: calc(100% - 30px); padding-right: 30px;"> 
+                    <img src="./images/eye1.png" id="togglePassword" style="cursor: pointer; position: absolute; right: 3px; top: 20%;transform: translateY(-50%);" alt="Toggle Password Visibility">  
+                </div><br> -->
+                <input type="password" placeholder="Password" name="password" id="password_data" required><br>
+                <input type="checkbox" onclick="myFunction()">Show Password
 
                 <input type="password" placeholder="Confirm Password" name="confirmPassword" id="confirmPassword"
                     required><br>
+                    <input type="checkbox" onclick="myFunction()">Show Password
 
                 <div class="safety" style="font-family: sans-serif; font-size: 20px;"></div>
 
@@ -265,21 +266,41 @@
 
     <script src="./register.js"></script>
     <script>
-        const togglePassword = document.querySelector("#togglePassword");
-        const passwordInput = document.querySelector("#password_data");
+        // const togglePassword = document.querySelector("#togglePassword");
+        // const passwordInput = document.querySelector("#password_data");
 
-        togglePassword.addEventListener("click", function () {
-            // Toggle the type attribute
-            const type = passwordInput.getAttribute("type") === "password" ? "text" : "password";
-            passwordInput.setAttribute("type", type);
+        // togglePassword.addEventListener("click", function () {
+        //     // Toggle the type attribute
+        //     const type = passwordInput.getAttribute("type") === "password" ? "text" : "password";
+        //     passwordInput.setAttribute("type", type);
 
-            // Toggle the eye icon (change the src to your open and closed eye icons)
-            if (type === "password") {
-                togglePassword.src = "./images/eye1.png"; // Closed eye icon
-            } else {
-                togglePassword.src = "./images/eye2.png"; // Open eye icon (change to the path of your open eye icon)
-            }
-        });
+        //     // Toggle the eye icon (change the src to your open and closed eye icons)
+        //     if (type === "password") {
+        //         togglePassword.src = "./images/eye1.png"; // Closed eye icon
+        //     } else {
+        //         togglePassword.src = "./images/eye2.png"; // Open eye icon (change to the path of your open eye icon)
+        //     }
+        // });
+        // function myFunction() {
+        //     var x = document.getElementById("password_data,confirmPassword");
+        //     if (x.type === "password" && x.type === "confirmPassword" ) {
+        //         x.type = "text";
+        //     } else {
+        //         x.type = "password";
+        //     }
+        // }
+        function myFunction() {
+    var passwordField = document.getElementById("password_data");
+    var confirmPasswordField = document.getElementById("confirmPassword");
+
+    if (passwordField.type === "password" && confirmPasswordField.type === "password") {
+        passwordField.type = "text";
+        confirmPasswordField.type = "text";
+    } else {
+        passwordField.type = "password";
+        confirmPasswordField.type = "password";
+    }
+}
 
 
         document.getElementById('register').addEventListener('submit', function (event) {
