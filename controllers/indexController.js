@@ -49,7 +49,7 @@ const handleLogin = async function handleLogin(req, res) {
     const { email, password } = req.body;
     // const token = await user.generateAuthToken();
     // Pehle check karein ki email already exist karta hai ya nahi
-    const existingUser = await User.findOne({ email });
+    const existingUser = await User.findOne({ email : req.body.email });
     console.log("User exist", existingUser);
 
     if (existingUser) {
@@ -81,6 +81,15 @@ const handleLogin = async function handleLogin(req, res) {
     // return res.status(401).redirect('/help')
     console.log(err);
   }
+  // const token = jwt.sign({userId: user._id},process.env.JWT_SECRET,{
+  //   expiresIn: "1d",
+  // });
+  // return res.status(200).send({
+  //   successs: true,
+  //   message:"Login Successfully",
+  //   token,
+  //   user,
+  // });
   // function setUser(user){
   //   return jwt.sign(user,secret);
 
@@ -100,9 +109,9 @@ const handleLogout = async function handleLogout(req, res) {
 
 };
 const handleRegister = async function handleRegister(req, res) {
-  const { name, email, password } = req.body;
-  if (!name || !email || !password) {
-    return res.status(422).json({ error: "plz filled the properly" });
+  const { name, email, password,age,gender,phone,bloodType } = req.body;
+  if (!name || !email || !password || !age || !gender || !phone || !bloodType){
+        return res.status(422).json({ error: "plz filled the properly" });
   }
 
   // console.log(req.body)
@@ -133,7 +142,8 @@ const handleRegister = async function handleRegister(req, res) {
       return res.status(422).json({ error: "Email already Exist" });
     }
 
-    const user = new User({ name: name, email: email, password: password });
+    const user = new User({ name: name, email: email, password: password , age:age , gender:gender,phone:phone,bloodType:bloodType});
+    console.log('Gender:', req.body.gender);
     await user.save();
 
     res.status(201).json({ message: "user registered successfuly" });
@@ -141,8 +151,8 @@ const handleRegister = async function handleRegister(req, res) {
     console.log(err);
   }
 };
-const handleHelp = async function handleHelp(req, res) {
-  const { name, email, phone, massage } = req.body;
+// const handleHelp = async function handleHelp(req, res) {
+//   const { name, email, phone, massage } = req.body;
 
   // let isValidUser=true
   // if(isValidUser) {
@@ -154,16 +164,16 @@ const handleHelp = async function handleHelp(req, res) {
   // }
 
   // console.log(req.body)
-  try {
-    const user = await User.create(req.body);
-    if (user) {
-      return res.status(200).redirect("/register");
-    } else {
-      return res.status(400).redirect("/help");
-    }
-  } catch (err) {
-    console.log("Error in help", err);
-  }
-};
+  // try {
+  //   const user = await User.create(req.body);
+  //   if (user) {
+  //     return res.status(200).redirect("/register");
+  //   } else {
+  //     return res.status(400).redirect("/help");
+  //   }
+  // } catch (err) {
+  //   console.log("Error in help", err);
+  // }
+// };
 
-module.exports = { handleLogin, handleRegister, handleHelp,handleLogout };
+module.exports = { handleLogin, handleRegister, handleLogout };

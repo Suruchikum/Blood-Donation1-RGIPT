@@ -26,6 +26,6 @@ router.post("/login", handleLogin);
 // router.post("/logout" , handleLogout);
 router.post("/register", handleRegister);
 
-router.post("/help", handleHelp);
+// router.post("/help", handleHelp);
 
 module.exports = router;

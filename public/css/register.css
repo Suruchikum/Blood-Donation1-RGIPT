@@ -109,9 +109,10 @@ header ul li a:hover{
     letter-spacing: 2px;
 }
 
-.user-form i{
+.user-form{
     position: absolute;
-    height: 50px;
+    height: 800px;
+    /* width: 500px; */
     
     margin: 25px 10px;
     color:#F08080 ;
@@ -227,4 +228,69 @@ input{
         margin:5px;
         padding:5px;
     }
+}
+/* Style for the label */
+label {
+    font-size: 16px; /* Change the font size */
+    color: #333; /* Change the text color */
+    font-weight: bold; /* Make the label text bold */
+    margin-right: 10px; /* Add space between label and input */
+}
+
+/* Style for the input field */
+input[type="number"] {
+    width: 100px; /* Set the width of the input field */
+    padding: 5px; /* Add some padding inside the input field */
+    border: 2px solid #ccc; /* Border color and width */
+    border-radius: 4px; /* Rounded corners for the input field */
+    font-size: 14px; /* Font size inside the input field */
+    margin-bottom: 10px; /* Space below the input field */
+    outline: none; /* Remove the default outline */
+}
+
+/* Add focus effect for input field */
+input[type="number"]:focus {
+    border-color: #007bff; /* Change border color when focused */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Add a subtle shadow */
+}
+/* Style for the label */
+label {
+    font-size: 16px; /* Set the font size */
+    color: #333; /* Set the text color */
+    font-weight: bold; /* Make the label text bold */
+    margin-right: 10px; /* Add space between label and input */
+}
+
+/* Style for the input field */
+input[type="tel"] {
+    width: 150px; /* Set the width of the input field */
+    padding: 8px; /* Add padding inside the input field */
+    border: 2px solid #ccc; /* Set the border color and width */
+    border-radius: 5px; /* Add rounded corners to the input field */
+    font-size: 14px; /* Set the font size inside the input field */
+    margin-bottom: 10px; /* Add space below the input field */
+    outline: none; /* Remove the default outline */
+}
+
+/* Focus effect for the input field */
+input[type="tel"]:focus {
+    border-color: #007bff; /* Change the border color when focused */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Add a shadow effect when focused */
+}
+.password-container {
+    position: relative;
+    width: 100%;
+}
+
+.password-container input {
+    width: 100%;
+    padding-right: 30px; /* Space for the eye icon */
+}
+
+.password-container img {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
 }

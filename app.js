@@ -1,5 +1,8 @@
 const dotenv = require("dotenv").config();
 const path = require("path");
+const { verifyToken } = require('./middleware/authMiddleware');
+const { query, matchedData, validationResult } = require('express-validator');
+
 const express = require("express");
 const bodyParser=require("body-parser");
 const mongoose=require("mongoose");
@@ -14,7 +17,7 @@ mongoose.connect(DB);
 // const testRoutes = require("./routes/testRoutes");
 
 const indexRoutes = require('./routes/indexRoutes');
-const {verifyToken} = require('./middleware/authMiddleware');
+// const {verifyToken} = require('./middleware/authMiddleware');
 // const helpRoutes = require("./routes/helpRoutes");
 // const { connect } = require("http2");
 const app = express();
@@ -27,7 +30,7 @@ app.use(bodyParser.json());
 // Root route
 // console.log(path.join(_dirname, "../BLOOD DONAR"));
 const staticpath = path.join(__dirname, "../RGIPT Blood Donation");
-app.use(express.static(path.join(__dirname, "./public")));
+// app.use(express.static(path.join(__dirname, "./public")));
 app.use(express.static(path.resolve("./public")));
 
 // console.log(staticpath);
@@ -47,9 +50,9 @@ app.get("/index", (req, res) => {
 });
 
 
-app.get("/help", (req, res) => {
-  res.render("help");
-});
+// app.get("/help", (req, res) => {
+//   res.render("help");
+// });
 
 app.get("/donate", verifyToken,(req, res) => {
   res.render("donate", { token: req.query.token });
@@ -93,6 +96,17 @@ app.get("/donate", verifyToken,(req, res) => {
 // });
 
 // const PORT = 5500;
+
+app.use(express.json());
+app.get('/hello', query('person').notEmpty().escape(), (req, res) => {
+  const result = validationResult(req);
+  if (result.isEmpty()) {
+    const data = matchedData(req);
+    return res.send(`Hello, ${data.person}!`);
+  }
+
+  res.send({ errors: result.array() });
+});
 app.listen(PORT, () => {
   console.log("Server is running at port", PORT);
 });
