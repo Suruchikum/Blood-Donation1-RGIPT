@@ -180,180 +180,178 @@
 </html> -->
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Start Saving Lives</title>
-    <link rel="stylesheet" href="./css/register.css">
-</head>
+    <link rel="stylesheet" href="./css/register.css" />
+  </head>
 
-<body>
+  <body>
     <header>
-        <h1>Welcome To My Website</h1>
-        <nav>
-            <div class="header-logo"><img src="./images/bb_logo(black).png" alt="bb_logo"></div>
-        </nav>
+      <h1>Welcome To My Website</h1>
+      <nav>
+        <div class="header-logo">
+          <img src="./images/bb_logo(black).png" alt="bb_logo" />
+        </div>
+      </nav>
     </header>
 
     <div class="inner">
-        <div class="user-form">
-            <h1>Start Saving Lives</h1>
-            <form id="registerForm" action="/register" method="post">
-                <i class="fas fa-user icon"></i>
-                <input type="text" name="name" placeholder="Name" required><br>
+      <div class="user-form">
+        <h1>Start Saving Lives</h1>
+        <form id="registerForm" action="/register" method="post">
+          <i class="fas fa-user icon"></i>
+          <input type="text" name="name" placeholder="Name" required /><br />
 
-                <i class="fas fa-envelope-square"></i>
-                <input type="email" placeholder="E-mail" name="email" required><br>
+          <i class="fas fa-envelope-square"></i>
+          <input
+            type="email"
+            placeholder="E-mail"
+            name="email"
+            required
+          /><br />
 
-                <!-- <i class="fas fa-lock"></i>
-                <input type="password" placeholder="Password" name="password" id="password_data" required><br>
-                <img src="./images/eye1.png" id="togglePassword" style="cursor: pointer;" alt="Toggle Password Visibility"><br> 
-                
+          <input
+            type="password"
+            placeholder="Password"
+            name="password"
+            id="password_data"
+            required
+          /><br />
+          <input type="checkbox" id="showPassword" />Show Password
 
-                <input type="password" placeholder="Confirm Password" name="confirmPassword" id="confirmPassword"
-                    required><br>
+          <input
+            type="password"
+            placeholder="Confirm Password"
+            name="confirmPassword"
+            id="confirmPassword"
+            required
+          /><br />
+          <input type="checkbox" id="showConfirmPassword" />Show Password
 
-                <div class="safety" style="font-family: sans-serif; font-size: 20px;"></div> -->
-                <!-- <i class="fas fa-lock"></i>
-                <div style="position: relative; width: 100%;">
-                    <input type="password" placeholder="Password" name="password" id="password_data" required
-                        style="width: calc(100% - 30px); padding-right: 30px;"> 
-                    <img src="./images/eye1.png" id="togglePassword" style="cursor: pointer; position: absolute; right: 3px; top: 20%;transform: translateY(-50%);" alt="Toggle Password Visibility">  
-                </div><br> -->
-                <input type="password" placeholder="Password" name="password" id="password_data" required><br>
-                <input type="checkbox" onclick="myFunction()">Show Password
+          <div
+            class="safety"
+            style="font-family: sans-serif; font-size: 20px"
+          ></div>
 
-                <input type="password" placeholder="Confirm Password" name="confirmPassword" id="confirmPassword"
-                    required><br>
-                    <input type="checkbox" onclick="myFunction()">Show Password
+          <label for="age">Age:</label>
+          <input type="number" id="age" name="age" required /><br />
 
-                <div class="safety" style="font-family: sans-serif; font-size: 20px;"></div>
+          <label for="gender">Gender:</label>
+          <select id="gender" name="gender" required>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="other">Other</option></select
+          ><br />
 
-                <label for="age">Age:</label>
-                <input type="number" id="age" name="age" required><br>
+          <label for="bloodType">Blood Type:</label>
+          <select id="bloodType" name="bloodType" required>
+            <option value="O+">O+</option>
+            <option value="O-">O-</option>
+            <option value="A+">A+</option>
+            <option value="A-">A-</option>
+            <option value="B+">B+</option>
+            <option value="B-">B-</option>
+            <option value="AB+">AB+</option>
+            <option value="AB-">AB-</option></select
+          ><br />
 
-                <label for="gender">Gender:</label>
-                <select id="gender" name="gender" required>
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
-                    <option value="other">Other</option>
-                </select><br>
+          <label for="phone">Phone:</label>
+          <input type="tel" id="phone" name="phone" required /><br />
 
-                <label for="bloodType">Blood Type:</label>
-                <select id="bloodType" name="bloodType" required>
-                    <option value="O+">O+</option>
-                    <option value="O-">O-</option>
-                    <option value="A+">A+</option>
-                    <option value="A-">A-</option>
-                    <option value="B+">B+</option>
-                    <option value="B-">B-</option>
-                    <option value="AB+">AB+</option>
-                    <option value="AB-">AB-</option>
-                </select><br>
-
-                <label for="phone">Phone:</label>
-                <input type="tel" id="phone" name="phone" required><br>
-
-                <div class="action-btn">
-                    <button type="submit" class="btn primary">Create Account</button>
-                    <button type="button" class="btn">Skip</button>
-                </div>
-            </form>
-        </div>
+          <div class="action-btn">
+            <button type="submit" class="btn primary">Create Account</button>
+            <button type="button" class="btn">Skip</button>
+          </div>
+        </form>
+      </div>
     </div>
 
     <script src="./register.js"></script>
     <script>
-        // const togglePassword = document.querySelector("#togglePassword");
-        // const passwordInput = document.querySelector("#password_data");
+      const passwordInput = document.getElementById("password_data");
+      const confirmPasswordInput = document.getElementById("confirmPassword");
+      const showPasswordCheckbox = document.getElementById("showPassword");
+      const showConfirmPasswordCheckbox = document.getElementById(
+        "showConfirmPassword"
+      );
+      // Define password strength criteria
+      const strongRegex =
+        /^(?=.{8,})(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*\W).*$/;
+      const mediumRegex =
+        /^(?=.{6,})(((?=.*[A-Z])(?=.*[a-z]))|((?=.*[A-Z])(?=.*[0-9]))|((?=.*[a-z])(?=.*[0-9]))).*$/;
+      const safetyDisplay = document.querySelector(".safety");
 
-        // togglePassword.addEventListener("click", function () {
-        //     // Toggle the type attribute
-        //     const type = passwordInput.getAttribute("type") === "password" ? "text" : "password";
-        //     passwordInput.setAttribute("type", type);
+      // toggle show password
+      showPasswordCheckbox.addEventListener("change", () => {
+        passwordInput.type = showPasswordCheckbox.checked ? "text" : "password";
+      });
 
-        //     // Toggle the eye icon (change the src to your open and closed eye icons)
-        //     if (type === "password") {
-        //         togglePassword.src = "./images/eye1.png"; // Closed eye icon
-        //     } else {
-        //         togglePassword.src = "./images/eye2.png"; // Open eye icon (change to the path of your open eye icon)
-        //     }
-        // });
-        // function myFunction() {
-        //     var x = document.getElementById("password_data,confirmPassword");
-        //     if (x.type === "password" && x.type === "confirmPassword" ) {
-        //         x.type = "text";
-        //     } else {
-        //         x.type = "password";
-        //     }
-        // }
-        function myFunction() {
-    var passwordField = document.getElementById("password_data");
-    var confirmPasswordField = document.getElementById("confirmPassword");
+      // toggle show confirm password
+      showConfirmPasswordCheckbox.addEventListener("change", () => {
+        confirmPasswordInput.type = showConfirmPasswordCheckbox.checked
+          ? "text"
+          : "password";
+      });
 
-    if (passwordField.type === "password" && confirmPasswordField.type === "password") {
-        passwordField.type = "text";
-        confirmPasswordField.type = "text";
-    } else {
-        passwordField.type = "password";
-        confirmPasswordField.type = "password";
-    }
-}
+      function getPasswordStrength(password) {
+        if (strongRegex.test(password)) {
+          return "strong";
+        } else if (mediumRegex.test(password)) {
+          return "medium";
+        } else {
+          return "weak";
+        }
+      }
 
+      passwordInput.addEventListener("keypress", () => {
+        // Validate password strength
+        const password = passwordInput.value;
+        const strength = getPasswordStrength(password);
+        // Update UI based on strength
+        safetyDisplay.innerHTML =
+          '<span>Password Strength</span><span class="line" id="line1"></span><span class="line" id="line2"></span><span class="line" id="line3"></span>';
 
-        document.getElementById('register').addEventListener('submit', function (event) {
-            const password = document.getElementById('password_data').value;
-            const confirmPassword = document.getElementById('confirmPassword').value;
-            const phone = document.getElementById('phone').value;
+        if (strongRegex.test(password)) {
+          document.querySelector("#line1").style.background = "green";
+          document.querySelector("#line2").style.background = "green";
+          document.querySelector("#line3").style.background = "green";
+        } else if (mediumRegex.test(password)) {
+          document.querySelector("#line1").style.background = "orange";
+          document.querySelector("#line2").style.background = "orange";
+        } else {
+          document.querySelector("#line1").style.background = "red";
+        }
+      });
 
+      document
+        .getElementById("registerForm")
+        .addEventListener("submit", function (event) {
+          const password = passwordInput.value;
+          const confirmPassword = confirmPasswordInput.value;
+          const phone = document.getElementById("phone").value;
 
+          // Validate password and confirm password match
+          if (password !== confirmPassword) {
+            alert("Passwords do not match. Please try again.");
+            event.preventDefault();
+            return;
+          }
 
+          // Validate phone number format (10 digits)
+          function validatePhone(phone) {
+            const re = /^\d{10}$/;
+            return re.test(phone);
+          }
 
-            // Validate password and confirm password match
-            if (password !== confirmPassword) {
-                alert('Passwords do not match. Please try again.');
-                event.preventDefault();
-                return;
-            }
-
-            // Validate phone number format (10 digits)
-            function validatePhone(phone) {
-                const re = /^\d{10}$/;
-                return re.test(phone);
-            }
-
-            if (!validatePhone(phone)) {
-                alert('Please enter a valid phone number.');
-                event.preventDefault();
-                return;
-            }
-
-            // Validate password strength
-            const strongRegex = new RegExp("^(?=.{14,})(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*\\W).*$", "g");
-            const mediumRegex = new RegExp("^(?=.{10,})(((?=.*[A-Z])(?=.*[a-z]))|((?=.*[A-Z])(?=.*[0-9]))|((?=.*[a-z])(?=.*[0-9]))).*$", "g");
-
-            const safetyDisplay = document.querySelector(".safety");
-
-            if (password.length === 0) {
-                safetyDisplay.innerHTML = "Enter Password";
-            } else {
-                safetyDisplay.innerHTML = '<span>Password Strength</span><span class="line" id="line1"></span><span class="line" id="line2"></span><span class="line" id="line3"></span>';
-
-                if (strongRegex.test(password)) {
-                    document.querySelector("#line1").style.background = "green";
-                    document.querySelector("#line2").style.background = "green";
-                    document.querySelector("#line3").style.background = "green";
-                } else if (mediumRegex.test(password)) {
-                    document.querySelector("#line1").style.background = "yellow";
-                    document.querySelector("#line2").style.background = "yellow";
-                } else {
-                    document.querySelector("#line1").style.background = "red";
-                }
-            }
+          if (!validatePhone(phone)) {
+            alert("Please enter a valid phone number.");
+            event.preventDefault();
+            return;
+          }
         });
     </script>
-</body>
-
+  </body>
 </html>

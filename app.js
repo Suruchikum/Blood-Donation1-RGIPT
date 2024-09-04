@@ -1,28 +1,25 @@
 const dotenv = require("dotenv").config();
 const path = require("path");
-const { verifyToken } = require('./middleware/authMiddleware');
-const { query, matchedData, validationResult } = require('express-validator');
+const { verifyToken } = require("./middleware/authMiddleware");
+const { query, matchedData, validationResult } = require("express-validator");
 
 const express = require("express");
-const bodyParser=require("body-parser");
-const mongoose=require("mongoose");
-const User=require("./modals/user.modals");
+const bodyParser = require("body-parser");
+const mongoose = require("mongoose");
+const User = require("./modals/user.modals");
 const DB = process.env.DATABASE;
 const PORT = process.env.PORT || 4500;
 
-
-mongoose.connect(DB); 
-// 
+mongoose.connect(DB);
+//
 // Ensure this file exists and is correctly set up
 // const testRoutes = require("./routes/testRoutes");
 
-const indexRoutes = require('./routes/indexRoutes');
+const indexRoutes = require("./routes/indexRoutes");
 // const {verifyToken} = require('./middleware/authMiddleware');
 // const helpRoutes = require("./routes/helpRoutes");
 // const { connect } = require("http2");
 const app = express();
-
-
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -37,10 +34,7 @@ app.use(express.static(path.resolve("./public")));
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
-
-
 //  app.use("/api/helpRoutes" , helpRoutes );
-
 
 app.get("/", (req, res) => {
   res.render("index");
@@ -49,16 +43,15 @@ app.get("/index", (req, res) => {
   res.render("index");
 });
 
-
 // app.get("/help", (req, res) => {
 //   res.render("help");
 // });
 
-app.get("/donate", verifyToken,(req, res) => {
+app.get("/donate", verifyToken, (req, res) => {
   res.render("donate", { token: req.query.token });
 });
 
- app.use("/", indexRoutes);
+app.use("/", indexRoutes);
 // app.get("/about", (req, res) => {
 //   res.status(200).json({
 //     message: " Hello About Welcome to Blood Donar",
@@ -98,7 +91,7 @@ app.get("/donate", verifyToken,(req, res) => {
 // const PORT = 5500;
 
 app.use(express.json());
-app.get('/hello', query('person').notEmpty().escape(), (req, res) => {
+app.get("/hello", query("person").notEmpty().escape(), (req, res) => {
   const result = validationResult(req);
   if (result.isEmpty()) {
     const data = matchedData(req);
