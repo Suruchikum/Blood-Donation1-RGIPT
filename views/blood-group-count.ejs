@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blood Group Chart</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <h1>Blood Group Distribution</h1>
+    <canvas id="bloodGroupChart" width="400" height="200"></canvas>
+
+    <script>
+        async function fetchBloodGroupData() {
+            const response = await fetch('/blood-group-count');
+            const data = await response.json();
+            return data;
+        }
+
+        async function renderChart() {
+            const bloodGroupData = await fetchBloodGroupData();
+
+            const bloodGroups = bloodGroupData.map(item => item._id);
+            const counts = bloodGroupData.map(item => item.count);
+
+            const ctx = document.getElementById('bloodGroupChart').getContext('2d');
+            const chart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: bloodGroups,
+                    datasets: [{
+                        label: 'Number of People',
+                        data: counts,
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        }
+
+        renderChart();
+    </script>
+</body>
+</html>

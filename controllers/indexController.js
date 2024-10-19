@@ -1,7 +1,7 @@
 const User = require("../modals/user.modals");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const secret = process.env.SECRET;
+const secret = process.env.SECRET_KEY;
 
 const handleLogin = async function handleLogin(req, res) {
   /* const email = req.body.email
@@ -48,30 +48,36 @@ const handleLogin = async function handleLogin(req, res) {
   try {
     const { email, password } = req.body;
     // const token = await user.generateAuthToken();
-    // Pehle check karein ki email already exist karta hai ya nahi
+    
     const existingUser = await User.findOne({ email : req.body.email });
     console.log("User exist", existingUser);
 
     if (existingUser) {
-      // Agar email already exist karta hai
+      
       const match = await bcrypt.compare(password, existingUser.password);
       // token = await existingUser.generateAuthToken();
       // console.log(token);
-      // //
+      
 
       if (match) {
         const token = jwt.sign({ existingUserId: existingUser._id }, secret, {
           expiresIn: "1h",
         });
 
-        return res.status(200).redirect(`/donate?token=${token}`);
+        // return res.status(200).redirect(`/donate?token=${token}`);
+        res.cookie("jwt", token, {
+          httpOnly: true,  
+          secure: process.env.NODE_ENV === "production", 
+        });
+
+        return res.status(200).redirect(`/donate`);
       } else {
         return res.status(401).redirect("/login");
       }
     }
     return res.status(401).json({ message: "User not found" });
   } catch (err) {
-    // Agar koi aur error hota hai to handle karein
+    
     // if (err.code === 11000 && err.keyPattern && err.keyPattern.email === 1) {
     //   res.status(409).send('Duplicate key error: Email already exists');
     //  else {
@@ -99,19 +105,15 @@ const handleLogin = async function handleLogin(req, res) {
   //   }
 };
 const handleLogout = async function handleLogout(req, res) {
-  const token = jwt.sign({existingUserId:null
+  res.clearCookie("jwt");
 
-  }, secret, {
-    expiresIn: "-1",
-  });
-  return res.status(200).redirect(`/login?token=${token}`);
-
-
+  return res.redirect('/')
 };
+
 const handleRegister = async function handleRegister(req, res) {
-  const { name, email, password,age,gender,phone,bloodType } = req.body;
-  if (!name || !email || !password || !age || !gender || !phone || !bloodType){
-        return res.status(422).json({ error: "plz filled the properly" });
+  const { name, email, password,age,gender,phone,bloodType, confirmPassword } = req.body;
+  if (!name || !email || !password || !age || !gender || !phone || !bloodType|| !confirmPassword){
+        return res.status(422).json({ error: "plz fill all the fields" });
   }
 
   // console.log(req.body)
@@ -141,7 +143,7 @@ const handleRegister = async function handleRegister(req, res) {
     if (userExist) {
       return res.status(422).json({ error: "Email already Exist" });
     }
-
+// ism confirmPassword send nahi kia hai isily error . wiase db me only password save hota hai. confirm password same hota hai
     const user = new User({ name: name, email: email, password: password , age:age , gender:gender,phone:phone,bloodType:bloodType});
     console.log('Gender:', req.body.gender);
     await user.save();
@@ -151,6 +153,9 @@ const handleRegister = async function handleRegister(req, res) {
     console.log(err);
   }
 };
+
+ 
+
 // const handleHelp = async function handleHelp(req, res) {
 //   const { name, email, phone, massage } = req.body;
 

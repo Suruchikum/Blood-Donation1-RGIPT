@@ -61,12 +61,12 @@ header ul li a:hover{
     color: white;
 } */
 
-*{
+/* *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 
-}
+} */
 
 .inner{
     height: 85%;
@@ -98,32 +98,34 @@ header ul li a:hover{
     width: 50%;
     height: 100%;
     border-radius: 0px 10px 10px 0px;
-}
+} 
 
 .user-form h1{
     color: #fff;
     padding: 30px 0;
     margin: 25px 10px;
     font-weight: 700;
+    
     font-family: 'Alegreya Sans SC', sans-serif;
     letter-spacing: 2px;
 }
 
 .user-form{
     position: absolute;
-    height: 800px;
-    /* width: 500px; */
+    height: 900px;
+     width: 800px; 
     
     margin: 25px 10px;
     color:#F08080 ;
+    border-radius: 0px 10px 10px 0px;
 }
-/* .pass-icon{
+.pass-icon{
     position: absolute;
     top:10px;
     right: 10px;
     width: 24px;
     cursor: pointer;
-} */
+} 
 
 input{
     width: 100%;
@@ -155,6 +157,23 @@ input{
     display: flex;
     margin: 30px 0;
 }
+/* .password-container {
+    position: relative;
+    width: 100%;
+}
+
+.password-container input {
+    width: 100%;
+    padding-right: 30px; /* Space for the eye icon */
+/* }
+
+.password-container img {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+} */ 
 
 .btn{
     font-family:'Alegreya Sans SC', sans-serif;
@@ -162,7 +181,8 @@ input{
     padding: 10px;
     background: transparent;
     border-radius: 20px;
-    width: 50%;
+    width: 60%;
+    
     cursor: pointer;
     font-weight:700px;
     font-size: medium;
@@ -177,6 +197,7 @@ input{
     font-family:'Alegreya Sans SC', sans-serif;
     background: none;
     border: 2px solid white;
+    height: 40px;
     color: white;
 
 }
@@ -221,6 +242,7 @@ input{
         margin: 5px;
         display: block;
         width: 100%;
+        background-color: #008B8B;
     }
 
     .btn{
@@ -276,21 +298,4 @@ input[type="tel"] {
 input[type="tel"]:focus {
     border-color: #007bff; /* Change the border color when focused */
     box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Add a shadow effect when focused */
-}
-.password-container {
-    position: relative;
-    width: 100%;
-}
-
-.password-container input {
-    width: 100%;
-    padding-right: 30px; /* Space for the eye icon */
-}
-
-.password-container img {
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    cursor: pointer;
 }

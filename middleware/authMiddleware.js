@@ -1,7 +1,28 @@
 const jwt = require("jsonwebtoken");
-const secret = process.env.SECRET;
+// const secret = process.env.SECRET_KEY;
+const User = require("../modals/user.modals");
+const Toastify =require('toastify-js')
 
-// function verifyToken(req, res, next) {
+
+const authMiddleware = async (req, res, next) => {
+  const token = req.cookies.jwt;
+console.log("token received", token)
+  if (!token) {
+    return res.status(401).send("Unauthorized: No token provided");
+  }
+
+  const secretKey = process.env.SECRET_KEY;
+
+  try {
+    const verified = jwt.verify(token, secretKey);
+    req.user = verified;
+    next();
+  } catch (err) {
+    
+    
+    return res.status(401).send("Unauthorized: Invalid token");
+  }
+};
 //     const token = req.header('Authorization') || req.query.token  ||  req.cookies.token;
 //     if (!token) return res.status(401).json({ error: 'Access denied' });
 
@@ -45,162 +66,44 @@ const secret = process.env.SECRET;
 //      }
 //      return next();
 //  };
-const verifyToken = (req, res, next) => {
-   const token =
-    req.cookies.token ||
-     req.query.token ||
-     req.headers["authorization"]?.split(" ")[1];
-
-  if (!token) {
-    return res.status(403).send("Token is required");
-   }
-
-   try {
-     const secret = process.env.SECRET; // Ensure your secret is loaded from environment variables
-     const decoded = jwt.verify(token, secret);
-     req.user = decoded;
-   } catch (err) {
-     console.error("JWT Verification Error:", err); // Optional, for debugging
-     return res.status(401).send("Invalid Token");
-   }
-
-   next();
- };
-
-// Middleware to verify the token
 // const verifyToken = (req, res, next) => {
-//   try {
-//     // Check if authorization header is set
-//     const authHeader = req.headers['authorization'];
+//    const token =
+//     req.cookies.token ||
+//      req.query.token ||
+//      req.headers["authorization"]?.split(" ")[1];
 
-//     if (!authHeader) {
-//       return res.status(401).json({ message: 'Authorization header is missing' });
-//     }
-
-//     // Split 'Bearer' and token
-//     const token = authHeader.split(' ')[1];
-
-//     if (!token) {
-//       return res.status(401).json({ message: 'Token is missing' });
-//     }
-
-//     // Verify the token
-//     jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
-//       if (err) {
-//         return res.status(403).json({ message: 'Invalid token' });
-//       }
-
-//       // Attach user info to request object
-//       req.user = user;
-//       next();
-//     });
-//   } catch (error) {
-//     console.error('Error verifying token:', error);
-//     res.status(500).json({ message: 'Internal server error' });
-//   }
-// };
-
-// function verifyToken(req, res, next) {
-//   //     // Attempt to get token from various sources
-//   let token =
-//     req.header("Authorization") || req.query.token || req.cookies.token;
-
-//   //     // Log the token for debugging purposes
-//   console.log("Authorization Header:", req.header("Authorization"));
-//   console.log("Query Token:", req.query.token);
-//   console.log("Cookies Token:", req.cookies.token);
-
-//   //     // Check if token is from 'Authorization' header and extract it
-//   if (token && token.startsWith("Bearer ")) {
-//     token = token.split(" ")[1]; // Extract the token after 'Bearer '
-//   }
-
-//   //     // Log the extracted token
-//   console.log("Extracted Token:", token);
-
-//   //     // If no token is found, return a 401 unauthorized response
 //   if (!token) {
-//     return res.status(401).json({ error: "Access denied. No token provided." });
-//   }
+//     return res.status(403).send("Token is required");
+//    }
 
-//   //     // Ensure secret is defined from environment variables
-//   const secret = process.env.JWT_SECRET;
-//   if (!secret) {
-//     console.error("JWT_SECRET is not defined in environment variables.");
-//     return res.status(500).json({ error: "Internal server error." });
-//   }
+//    try {
+//      const secret = process.env.SECRET; // Ensure your secret is loaded from environment variables
+//      const decoded = jwt.verify(token, secret);
+//      req.user = decoded;
+//    } catch (err) {
+//      console.error("JWT Verification Error:", err); // Optional, for debugging
+//      return res.status(401).send("Invalid Token");
+//    }
 
+//    next();
+//  };
+
+// const verifyToken = (req, res, next) => {
+//   const token =
+//     req.body.token || req.query.token || req.headers["x-access-token"];
+
+//   if (!token) {
+//     return res.status(403).send("A token is required for authentication");
+//   }
 //   try {
-//     // Verify the token using the secret key
-//     const decoded = jwt.verify(token, secret);
-//     req.userId = decoded.userId; // Store user ID from the token in the request object
-//     next(); // Proceed to the next middleware or route handler
-//   } catch (error) {
-//     //         // If the token verification fails, return a 401 unauthorized response
-//     console.error("Token verification failed:", error.message);
-//     return res.status(401).json({ error: "Invalid token." });
+//     const decoded = jwt.verify(token, config.TOKEN_KEY);
+//     req.user = decoded;
+//   } catch (err) {
+//     return res.status(401).send("Invalid Token");
 //   }
-// }
-
-// verifyToken= async(req,res,next) => {
-//     try{
-//         const token = req.headers['authorization'].split("")[1]
-//         jwt.verify(token,process.env.JWT_SECRET,(err,decode) =>{
-//             if(err){
-//                 return res.status(401).send({
-//                     success:false,
-//                     message:'Auth Failed'
-//                 })
-
-//             }
-//             else{
-//                 req.body.userId = decode.id;
-//                 next();
-//             }
-//         });
-//     }
-//     catch(error){
-//         console.log(error)
-//         return res.status(401).send({
-//             success:false,
-//             error,
-//             message: 'Auth Failed'
-//         });
-//     }
+//   return next();
 // };
-// function verifyToken(req, res, next) {
-//     // Token ko retrieve karne ki koshish
-//     let token = req.header('Authorization') || req.query.token || req.cookies.token;
 
-//     // Check karein ki token defined hai aur string hai, aur 'Bearer ' se start ho raha hai
-//      if (typeof token === 'string' ) {
-//         // Token se 'Bearer ' hata ke actual token value ko assign karein
-//         // token = token.split(' ')[1];
-//         token  = string;
-//     } else {
-//         // Agar token invalid hai, toh null set karein
-//         token = null;
-//     }
+// module.exports =  {verifyToken} ;
 
-//     // Token ki existence ko check karein
-//     if (!token) {
-//         return res.status(401).json({ error: 'Access denied. No token provided.' });
-//     }
-
-//     const secret = process.env.JWT_SECRET;
-//     if (!secret) {
-//         console.error('JWT_SECRET environment variable is not defined.');
-//         return res.status(500).json({ error: 'Internal server error.' });
-//     }
-
-//     try {
-//         const decoded = jwt.verify(token, secret);
-//         req.userId = decoded.userId;
-//         next();
-//     } catch (error) {
-//         console.error('Token verification failed:', error.message);
-//         return res.status(401).json({ error: 'Invalid token.' });
-//     }
-// }
-
-module.exports = { verifyToken };
+module.exports = authMiddleware;

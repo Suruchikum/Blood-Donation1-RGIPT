@@ -184,6 +184,7 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
+
 // const saltRounds = process.env.SALT_ROUNDS || 10; // Use environment variable for salt rounds or default to 10
 
 const userSchema = new mongoose.Schema({
@@ -206,11 +207,19 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: [true, 'Password is required'],
   },
+ 
   age: {
     type: Number,
     required: true,
     min: [0, 'Age must be a positive number'],
   },
+  // dob: {
+  //   type: Date,
+  //   required: true,
+  // },
+  
+
+
   gender: {
     type: String,
     enum: ['male', 'female', 'other'], // Ensure these match the input values
@@ -233,6 +242,13 @@ const userSchema = new mongoose.Schema({
     enum: ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'],
     required: true,
   },
+  tokens:[{
+    token:{
+    type:String,
+    required:true
+    }
+    }],
+  
   status: {
     type: String,
     default: 'active',
@@ -249,6 +265,21 @@ const userSchema = new mongoose.Schema({
 }, { timestamps: true });
 
 // Hash the password before saving the user
+userSchema.methods.generateAuthToken = async function(){
+  try{
+     console.log(this._id);
+     const token = jwt.sign({_id:this._id.toString()}, process.env.SECRET_KEY);
+    this.tokens = this.tokens.concat({token});
+
+    await this.save();
+    return token;
+
+  }
+  catch(error){
+    resizeBy.send("the error part" + error);
+    console.log("the error part" + error);
+  }
+}
 userSchema.pre('save', async function (next) {
     const saltRounds = 10;
   if (this.isModified('password') || this.isNew) {
