@@ -3,6 +3,7 @@ const router = express.Router();
 const User = require("../modals/user.modals");
 const jwt = require("jsonwebtoken");
 
+
 const authMiddleware = require("../middleware/authMiddleware");
 
 const {
@@ -28,4 +29,6 @@ router.post("/register", handleRegister);
 router.use((req, res, next) => {
   next();
 });
+
+
 module.exports = router;

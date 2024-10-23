@@ -20,7 +20,7 @@ header{
     font-weight: 100;
 }
 
-.header-logo{
+/* .header-logo{
     font-size: 10px;
     float: left;
     padding-left: 30px;
@@ -30,7 +30,7 @@ header{
 
 .header-logo > img {
     width: 70%;
-}
+} */
 
 /* li a{
     text-decoration: none;
@@ -92,148 +92,139 @@ header ul li a:hover{
     height: 100%;
 }
 
-.user-form{
+
+ /* Form Container Styling */
+.user-form {
     background: #F08080;
     padding: 40px;
     width: 50%;
-    height: 100%;
     border-radius: 0px 10px 10px 0px;
-} 
+}
 
-.user-form h1{
+.user-form h1 {
     color: #fff;
-    padding: 30px 0;
-    margin: 25px 10px;
+    margin-bottom: 30px;
     font-weight: 700;
-    
     font-family: 'Alegreya Sans SC', sans-serif;
     letter-spacing: 2px;
 }
 
-.user-form{
-    position: absolute;
-    height: 900px;
-     width: 800px; 
-    
-    margin: 25px 10px;
-    color:#F08080 ;
-    border-radius: 0px 10px 10px 0px;
-}
-.pass-icon{
-    position: absolute;
-    top:10px;
-    right: 10px;
-    width: 24px;
-    cursor: pointer;
-} 
-
-input{
-    width: 100%;
-    height: 3em;
-    border: none;
-    border-radius: 30px;
-    font-size: 15px;
-    margin: 10px 0;
-    padding: 0 30px;
-}
-
-.safety{
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    color: #fff;
-}
-
-.line{
-    height: 6px;
-    border-radius: 20px;
-    width: 20%;
-    background: #fff;
-    margin: 5px;
-}
-
-.action-btn{
-    width: 100%;
-    display: flex;
-    margin: 30px 0;
-}
-/* .password-container {
+/* Input field styling */
+.input-field {
     position: relative;
-    width: 100%;
+    margin-bottom: 20px;
 }
 
-.password-container input {
-    width: 100%;
-    padding-right: 30px; /* Space for the eye icon */
-/* }
-
-.password-container img {
+.input-field .icon {
     position: absolute;
-    right: 10px;
+    left: 10px;
     top: 50%;
     transform: translateY(-50%);
-    cursor: pointer;
-} */ 
-
-.btn{
-    font-family:'Alegreya Sans SC', sans-serif;
-    border: 1px solid #fff;
-    padding: 10px;
-    background: transparent;
-    border-radius: 20px;
-    width: 60%;
-    
-    cursor: pointer;
-    font-weight:700px;
-    font-size: medium;
-    margin: 0 10px;
-    background: none;
-    border: 2px solid white;
-    color: white;
+    color: #888;
+    font-size: 20px;
 }
 
-.primary{
-    font-size: medium;
-    font-family:'Alegreya Sans SC', sans-serif;
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    width: calc(100% - 40px); /* Reserve space for the icon */
+    padding: 10px 15px 10px 40px; /* Padding left to accommodate the icon */
+    font-size: 16px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+input[type="checkbox"] {
+    margin-left: 10px;
+    margin-bottom: 20px;
+}
+
+/* Button styling */
+.primary {
     background: none;
     border: 2px solid white;
     height: 40px;
     color: white;
-
+    padding: 10px 20px;
+    font-family: 'Alegreya Sans SC', sans-serif;
+    font-size: 18px;
+    cursor: pointer;
+    border-radius: 20px;
+    transition: background 0.3s ease;
 }
-.primary:hover{
+
+.primary:hover {
     background: linear-gradient(45deg, yellow 24%, orange 100%);
-    border: none;
     color: black;
-
-  
-}
-.btn:hover{
-    background: linear-gradient(45deg, yellow 24%, orange 100%);
     border: none;
-    color: black;  
 }
 
-@media(max-width:700px){
-    /* .photo{
-        display: none;
-    } */
-    .user-form{
-        width: 100%;
-        border-radius: 10px;
-        font-size: 20px
-    }
-    .action-btn{
-        margin: 5px;
-        display: block;
-        width: 100%;
+
+/* Button Container Styling */
+.action-btn {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+}
+
+/* General Button Styling */
+.btn {
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-size: 16px;
+    font-family: 'Alegreya Sans SC', sans-serif;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    border: 2px solid white;
+    color: white;
+    background: none;
+    width: 45%;
+    text-align: center;
+}
+
+/* Primary Button Styling */
+.btn.primary {
+    background: linear-gradient(45deg, #FFA500 30%, #FFD700 100%);
+    color: black;
+    border: none;
+}
+
+.btn.primary:hover {
+    background: linear-gradient(45deg, #FFD700 30%, #FFA500 100%);
+    color: white;
+}
+
+/* Secondary Button Styling */
+.btn.secondary {
+    background: none;
+    border: 2px solid white;
+    color: white;
+}
+
+.btn.secondary:hover {
+    background: #F08080;
+    color: black;
+    border: none;
+}
+
+/* Mobile Responsive Styling */
+@media (max-width: 768px) {
+    .action-btn {
+        flex-direction: column;
     }
 
-    .btn{
-        width:100%;
-        margin:5px;
-        padding:5px;
-       
+    .btn {
+        width: 100%;
+        margin-bottom: 10px;
     }
 }
 
@@ -250,7 +241,7 @@ input{
         margin:5px;
         padding:5px;
     }
-}
+} */
 /* Style for the label */
 label {
     font-size: 16px; /* Change the font size */

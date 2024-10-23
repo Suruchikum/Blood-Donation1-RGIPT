@@ -11,7 +11,13 @@
     <link rel="stylesheet" href="./css/index.css">
 
 </head>
-
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+ <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+ <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" /><link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+ <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+ <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <body>
     <img src="./images/logorgipt.png" alt="logo">
     <button onclick="topFunction()" id="myBtn" class="fas fa-arrow-up"></button>
@@ -35,6 +41,26 @@
                 <p>Become a donor or request for blood And help save lives</p>
 
             </div>
+            <p>
+                <div class="container">
+                 <div>
+                  <a href="/success-flash" class="btn btn-success">Flash</a>
+                  <a href="/no-flash" class="btn btn-info">No Flash</a>
+                  <a href="/error-flash" class="btn btn-danger">Error</a>
+                 </div>
+                 
+                </div>
+               
+               </p>
+               <% if (typeof message !== 'undefined' && message.length > 0) { %> 
+                <div class="container">
+                  <div class="alert alert-<%= message[1] %> w-50" id="myAlert" role="alert">
+                    <div class="row">
+                      <p><%= message[0] %></p>
+                    </div>
+                  </div>
+                </div>
+              <% } %>
 
 
 
@@ -239,7 +265,8 @@
         </div>
 
     </section>
-
+    
+       
     <!--FOOTER-->
 
     <footer>
@@ -284,6 +311,20 @@
 
 
     <script src="./scripts/scroll.js"></script>
+    <script>
+ 
+        function vanish(){
+         $('#myAlert').fadeOut('fast');
+        }
+       
+        $("#close").click(vanish)
+       
+        $(document).ready(function () {   
+          setTimeout(function () {
+            vanish()
+          }, 3000);
+        });
+         </script> 
 
 
 </body>

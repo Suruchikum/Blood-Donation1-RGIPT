@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 
 const User = require("../modals/user.modals");
-const Toastify = require("toastify-js");
+const Toastify = require("toastify-js"); 
 
 const authMiddleware = async (req, res, next) => {
   const token = req.cookies.jwt;
@@ -13,7 +13,7 @@ const authMiddleware = async (req, res, next) => {
   const secretKey = process.env.SECRET_KEY;
 
   try {
-    const verified = jwt.verify(token, secretKey);
+    const verified = jwt.verify(token, secretKey);cd 
     req.user = verified;
     next();
   } catch (err) {
