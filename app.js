@@ -7,8 +7,11 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const User = require("./modals/user.modals");
+const session = require("express-session");
+const flash = require("connect-flash");
 const DB = process.env.DATABASE;
 const PORT = process.env.PORT || 4500;
+const flashMessageMiddleware = require("./middleware/flashMessage");
 
 mongoose.connect(DB);
 //
@@ -23,6 +26,19 @@ const app = express();
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+// establish session
+app.use(
+  session({
+    secret: process.env.SECRET,
+    saveUninitialized: true,
+    resave: true,
+  })
+);
+// Configure flash middleware
+app.use(flash());
+app.use(flashMessageMiddleware.flashMessage);
+// bootstrap
+app.use("/", express.static("./node_modules/bootstrap/dist/"));
 
 // Root route
 // console.log(path.join(_dirname, "../BLOOD DONAR"));

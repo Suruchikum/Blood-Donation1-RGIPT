@@ -46,26 +46,26 @@ const secret = process.env.SECRET;
 //      return next();
 //  };
 const verifyToken = (req, res, next) => {
-   const token =
-    req.cookies.token ||
-     req.query.token ||
-     req.headers["authorization"]?.split(" ")[1];
+  const token =
+    req.cookies?.token ||
+    req.query?.token ||
+    req.headers["authorization"]?.split(" ")[1];
 
   if (!token) {
     return res.status(403).send("Token is required");
-   }
+  }
 
-   try {
-     const secret = process.env.SECRET; // Ensure your secret is loaded from environment variables
-     const decoded = jwt.verify(token, secret);
-     req.user = decoded;
-   } catch (err) {
-     console.error("JWT Verification Error:", err); // Optional, for debugging
-     return res.status(401).send("Invalid Token");
-   }
+  try {
+    const secret = process.env.SECRET; // Ensure your secret is loaded from environment variables
+    const decoded = jwt.verify(token, secret);
+    req.user = decoded;
+  } catch (err) {
+    console.error("JWT Verification Error:", err); // Optional, for debugging
+    return res.status(401).send("Invalid Token");
+  }
 
-   next();
- };
+  next();
+};
 
 // Middleware to verify the token
 // const verifyToken = (req, res, next) => {
