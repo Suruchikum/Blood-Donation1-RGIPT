@@ -49,8 +49,8 @@ const handleLogin = async function handleLogin(req, res) {
     const { email, password } = req.body;
     // const token = await user.generateAuthToken();
     // Pehle check karein ki email already exist karta hai ya nahi
-    const existingUser = await User.findOne({ email : req.body.email });
-    console.log("User exist", existingUser);
+    const existingUser = await User.findOne({ email: req.body.email });
+    console.log("🚀 ~ existingUser:", existingUser);
 
     if (existingUser) {
       // Agar email already exist karta hai
@@ -63,13 +63,15 @@ const handleLogin = async function handleLogin(req, res) {
         const token = jwt.sign({ existingUserId: existingUser._id }, secret, {
           expiresIn: "1h",
         });
-
+        req.flash("success", "Login Success!");
         return res.status(200).redirect(`/donate?token=${token}`);
       } else {
+        req.flash("error", "Invalid password!");
         return res.status(401).redirect("/login");
       }
     }
-    return res.status(401).json({ message: "User not found" });
+    req.flash("error", "User not found!");
+    res.status(401).json({ message: "User not found" });
   } catch (err) {
     // Agar koi aur error hota hai to handle karein
     // if (err.code === 11000 && err.keyPattern && err.keyPattern.email === 1) {
@@ -80,6 +82,8 @@ const handleLogin = async function handleLogin(req, res) {
 
     // return res.status(401).redirect('/help')
     console.log(err);
+    req.flash("error", err.message);
+    return res.status(401).redirect("/login");
   }
   // const token = jwt.sign({userId: user._id},process.env.JWT_SECRET,{
   //   expiresIn: "1d",
@@ -99,19 +103,15 @@ const handleLogin = async function handleLogin(req, res) {
   //   }
 };
 const handleLogout = async function handleLogout(req, res) {
-  const token = jwt.sign({existingUserId:null
-
-  }, secret, {
+  const token = jwt.sign({ existingUserId: null }, secret, {
     expiresIn: "-1",
   });
   return res.status(200).redirect(`/login?token=${token}`);
-
-
 };
 const handleRegister = async function handleRegister(req, res) {
-  const { name, email, password,age,gender,phone,bloodType } = req.body;
-  if (!name || !email || !password || !age || !gender || !phone || !bloodType){
-        return res.status(422).json({ error: "plz filled the properly" });
+  const { name, email, password, age, gender, phone, bloodType } = req.body;
+  if (!name || !email || !password || !age || !gender || !phone || !bloodType) {
+    return res.status(422).json({ error: "plz filled the properly" });
   }
 
   // console.log(req.body)
@@ -139,41 +139,51 @@ const handleRegister = async function handleRegister(req, res) {
   try {
     const userExist = await User.findOne({ email: email });
     if (userExist) {
+      req.flash("error", "Email already Exist");
       return res.status(422).json({ error: "Email already Exist" });
     }
 
-    const user = new User({ name: name, email: email, password: password , age:age , gender:gender,phone:phone,bloodType:bloodType});
-    console.log('Gender:', req.body.gender);
+    const user = new User({
+      name: name,
+      email: email,
+      password: password,
+      age: age,
+      gender: gender,
+      phone: phone,
+      bloodType: bloodType,
+    });
+    console.log("Gender:", req.body.gender);
     await user.save();
-
+    req.flash("success", "User registered successfully");
     res.status(201).json({ message: "user registered successfuly" });
   } catch (err) {
+    req.flash("error", err.message);
     console.log(err);
   }
 };
 // const handleHelp = async function handleHelp(req, res) {
 //   const { name, email, phone, massage } = req.body;
 
-  // let isValidUser=true
-  // if(isValidUser) {
-  //     const msg = "Valid user"
-  //     return res.status(200).redirect('/index')
-  // } else {
-  //     const msg = "Invalid login"
-  //     return res.status(400).redirect('/help')
-  // }
+// let isValidUser=true
+// if(isValidUser) {
+//     const msg = "Valid user"
+//     return res.status(200).redirect('/index')
+// } else {
+//     const msg = "Invalid login"
+//     return res.status(400).redirect('/help')
+// }
 
-  // console.log(req.body)
-  // try {
-  //   const user = await User.create(req.body);
-  //   if (user) {
-  //     return res.status(200).redirect("/register");
-  //   } else {
-  //     return res.status(400).redirect("/help");
-  //   }
-  // } catch (err) {
-  //   console.log("Error in help", err);
-  // }
+// console.log(req.body)
+// try {
+//   const user = await User.create(req.body);
+//   if (user) {
+//     return res.status(200).redirect("/register");
+//   } else {
+//     return res.status(400).redirect("/help");
+//   }
+// } catch (err) {
+//   console.log("Error in help", err);
+// }
 // };
 
 module.exports = { handleLogin, handleRegister, handleLogout };
