@@ -39,7 +39,11 @@ app.use(flash());
 app.use(flashMessageMiddleware.flashMessage);
 // bootstrap
 app.use("/", express.static("./node_modules/bootstrap/dist/"));
-
+app.use("/fa", express.static(__dirname + "/node_modules/font-awesome/css"));
+app.use(
+  "/fonts",
+  express.static(__dirname + "/node_modules/font-awesome/fonts")
+);
 // Root route
 // console.log(path.join(_dirname, "../BLOOD DONAR"));
 const staticpath = path.join(__dirname, "../RGIPT Blood Donation");

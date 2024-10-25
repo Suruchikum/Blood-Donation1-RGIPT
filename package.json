@@ -127,6 +127,7 @@
     "fill-range": "^7.1.1",
     "finalhandler": "^1.2.0",
     "find-root": "^0.1.2",
+    "font-awesome": "^4.7.0",
     "forever-agent": "^0.6.1",
     "form-data": "^2.3.3",
     "forwarded": "^0.2.0",
