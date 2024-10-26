@@ -6,9 +6,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Raleway&display=swap");
 @import url("./partials/navbar.css");
 
-/* *{
+ *{
 margin: 0px;
-}  */
+color: #000;
+}  
 /* .preloader {
 align-items: center;
 background: rgb(0, 0, 0);
@@ -42,6 +43,7 @@ img {
 
 body {
   background-color: #27bcda;
+  color: #cd5c5c;
   
 }
 

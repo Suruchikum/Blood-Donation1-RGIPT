@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const { number } = require("assert-plus");
 
 const userSchema = new mongoose.Schema(
   {
@@ -24,20 +25,18 @@ const userSchema = new mongoose.Schema(
       required: [true, "Password is required"],
     },
 
-    age: {
-      type: Number,
-      required: true,
-      min: [0, "Age must be a positive number"],
+    dob: {
+      type: Date,
+      required: [true, 'Date of Birth is required'],
     },
-
     gender: {
       type: String,
       enum: ["male", "female", "other"],
       required: true,
     },
     phone: {
-      type: String,
-      required: true,
+      type: Number,
+      required: [true, 'Phone number is required'],
       unique: true,
       match: [/^\d{10}$/, "Please enter a valid 10-digit phone number"],
     },

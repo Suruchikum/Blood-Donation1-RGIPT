@@ -2,7 +2,60 @@ const User = require("../modals/user.modals");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const secret = process.env.SECRET_KEY;
+const nodemailer = require("nodemailer");
 
+
+
+// const sendMail = async (req, res) => {
+//   let testAccount = await nodemailer.createTestAccount();
+  
+//   let transporter = nodemailer.createTransport({
+//     host: "smtp.ethereal.email",
+//     port: 587,
+//     secure: false,
+//     auth: {
+//       user: testAccount.user,
+//       pass: testAccount.pass,
+//     },
+//   });
+
+//   let info = await transporter.sendMail({
+//     from: '"Suruchi Kumari 👻" <suruchikumari1964@gmail.com>',
+//     to: "22it3056@rgipt.ac.in",
+//     subject: "Hello ✔",
+//     text: "Hello world?",
+//     html: "<b>Hello world?</b>",
+//   });
+
+//   console.log("Message sent: %s", info.messageId);
+//   console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+//   res.json({ message: "Email sent successfully", info });
+// };
+
+const sendMail = async (req, res) => {
+  // Manually fixed Ethereal account details yaha daalein
+  let transporter = nodemailer.createTransport({
+    host: "smtp.ethereal.email",
+    port: 587,
+    secure: false,
+    auth: {
+      user: "hipolito.hyatt82@ethereal.email",
+        pass: "XQSReMVTRaW5rvf4yG",
+    },
+  });
+
+  let info = await transporter.sendMail({
+    from: '"Suruchi Kumari 👻" <suruchikumari1964@gmail.com>',
+    to: "22it3056@rgipt.ac.in",
+    subject: "Hello ✔",
+    text: "Hello world?",
+    html: "<b>Hello world?</b>",
+  });
+
+  console.log("Message sent: %s", info.messageId);
+  console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+  res.json({ message: "Email sent successfully", info });
+};
 const handleLogin = async function handleLogin(req, res) {
   try {
     const { email, password } = req.body;
@@ -45,7 +98,7 @@ const handleRegister = async function handleRegister(req, res) {
     name,
     email,
     password,
-    age,
+    dob,
     gender,
     phone,
     bloodType,
@@ -55,7 +108,7 @@ const handleRegister = async function handleRegister(req, res) {
     !name ||
     !email ||
     !password ||
-    !age ||
+    !dob ||
     !gender ||
     !phone ||
     !bloodType ||
@@ -74,7 +127,7 @@ const handleRegister = async function handleRegister(req, res) {
       name: name,
       email: email,
       password: password,
-      age: age,
+      dob: dob,
       gender: gender,
       phone: phone,
       bloodType: bloodType,
@@ -83,9 +136,24 @@ const handleRegister = async function handleRegister(req, res) {
     await user.save();
 
     res.status(201).json({ message: "user registered successfuly" });
+    
   } catch (err) {
     console.log(err);
   }
 };
 
-module.exports = { handleLogin, handleRegister, handleLogout };
+
+const someControllerFunction = (req, res) => {
+  const success = true; // Example logic
+
+  if (success) {
+      res.redirect("/donate");
+  } else {
+      res.render('form', { messages: { error_message: "There was an error submitting the form." } });
+  }
+};
+
+
+
+
+module.exports = { handleLogin, handleRegister, handleLogout,someControllerFunction,sendMail };

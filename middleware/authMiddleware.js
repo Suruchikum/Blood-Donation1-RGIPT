@@ -13,7 +13,8 @@ const authMiddleware = async (req, res, next) => {
   const secretKey = process.env.SECRET_KEY;
 
   try {
-    const verified = jwt.verify(token, secretKey);cd 
+    const verified = jwt.verify(token, secretKey);
+   
     req.user = verified;
     next();
   } catch (err) {
