@@ -1,292 +1,91 @@
-@import url('https://fonts.googleapis.com/css2?family=Alegreya+Sans+SC:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Outfit:wght@100..900&display=swap');
 
 body{
-    background: url("../images/bb_logo\(black\).png");
-}
-h1{
-    text-align: center;
-    color: #008B8B;
-    text-transform: uppercase;
-    background-color: #070707;
-}
-
-header{
-    background-color: white;
-    color: white;
-    height: 18%;
-    width: 100%;
-	z-index: 10;
-	position: fixed;
-    font-weight: 100;
-}
-
-/* .header-logo{
-    font-size: 10px;
-    float: left;
-    padding-left: 30px;
-    padding-top: 0px;
-
-}
-
-.header-logo > img {
-    width: 70%;
-} */
-
-/* li a{
-    text-decoration: none;
-    display: block;
-    text-decoration: none;
-    text-transform: uppercase;
-    color: black;
-    font-size: 20px;
-    font-family: 'Raleway', sans-serif;
-    letter-spacing: 2px;
-    font-weight: 600;
-    margin-bottom: 10px;
-    padding: 20px;
-    transition: all ease 0.5s;
-}
-
-li{
-    float: right;
-    padding-left: 30px;
-    padding-top: 30px;
-    list-style: none;
-    padding-right: 40px;
-    font-size: 24px;
-}
-
-header ul li a:hover{
-    background-color:rgba(220,20,60);
-    color: white;
-} */
-
-/* *{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-
-} */
-
-.inner{
-    height: 85%;
-    width: 70%;
-    position: absolute;
-    top: 80%;
-    left: 50%;
-    bottom: 50%;
-    transform: translate(-50%,-50%);
-    box-shadow: 10px 10px 68px -6px rgba(0,0,0,0.5);
+    background: #F2F2F2;  
+    background-image: url("../images/background.jpg");
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
     display: flex;
-    justify-content: space-between;
-    border-radius: 10px;
+    justify-content: center;
+    align-items: center;   
 }
 
-.photo{
-    width: 50%;
-    height: 100%;
-}
-
-.photo img{
-    width: 110%;
-    height: 100%;
-}
-
-
- /* Form Container Styling */
-.user-form {
-    background: #F08080;
+.form-container{
+    background: #ecf0f3;
+    font-family: 'Nunito', sans-serif;
     padding: 40px;
-    width: 50%;
-    border-radius: 0px 10px 10px 0px;
+    border-radius: 20px;
+    box-shadow: 14px 14px 20px #cbced1, -14px -14px 20px white;
 }
-
-.user-form h1 {
-    color: #fff;
-    margin-bottom: 30px;
+.form-container .form-icon{
+    color: #ac40ab;
+    font-size: 55px;
+    text-align: center;
+    line-height: 100px;
+    width: 100px;
+    height:100px;
+    margin: 0 auto 15px;
+    border-radius: 50px;
+    box-shadow: 7px 7px 10px #cbced1, -7px -7px 10px #fff;
+}
+.form-container .title{
+    color: #ac40ab;
+    font-size: 25px;
     font-weight: 700;
-    font-family: 'Alegreya Sans SC', sans-serif;
-    letter-spacing: 2px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-align: center;
+    margin: 0 0 20px;
 }
-
-/* Input field styling */
-.input-field {
-    position: relative;
-    margin-bottom: 20px;
+.form-container .form-horizontal .form-group{ margin: 0 0 25px 0; }
+.form-container .form-horizontal .form-group label{
+    font-size: 15px;
+    font-weight: 600;
+    text-transform: uppercase;
 }
-
-.input-field .icon {
-    position: absolute;
-    left: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: #888;
-    font-size: 20px;
+.form-container .form-horizontal .form-control{
+    color: #333;
+    background: #ecf0f3;
+    font-size: 15px;
+    height: 50px;
+    padding: 10px 20px;
+    letter-spacing: 1px;
+    border: none;
+    border-radius: 50px;
+    box-shadow: inset 6px 6px 6px #cbced1, inset -6px -6px 6px #fff;
+    display: inline-block;
+    transition: all 0.3s ease 0s;
 }
-
-input[type="text"],
-input[type="email"],
-input[type="password"] {
-    width: calc(100% - 40px); /* Reserve space for the icon */
-    padding: 10px 15px 10px 40px; /* Padding left to accommodate the icon */
-    font-size: 16px;
-    border: 2px solid #ccc;
-    border-radius: 5px;
+.form-container .form-horizontal .form-control:focus{
+    box-shadow: inset 6px 6px 6px #cbced1, inset -6px -6px 6px #fff;
+    outline: none;
+}
+.form-container .form-horizontal .form-control::placeholder{
+    color: #808080;
+    font-size: 14px;
+}
+.form-container .form-horizontal .btn{
+    color: #000;
+    background-color: #ac40ab;
+    font-size: 15px;
+    font-weight: bold;
+    text-transform: uppercase;
+    width: 100%;
+    padding: 12px 15px 11px;
+    border-radius: 20px;
+    box-shadow: 6px 6px 6px #cbced1, -6px -6px 6px #fff;
+    border: none;
+    transition: all 0.5s ease 0s;
+}
+.form-container .form-horizontal .btn:hover,
+.form-container .form-horizontal .btn:focus{
+    color: #fff;
+    letter-spacing: 3px;
+    box-shadow: none;
     outline: none;
 }
 
-input[type="text"]:focus,
-input[type="email"]:focus,
-input[type="password"]:focus {
-    border-color: #007bff;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-}
-
-input[type="checkbox"] {
-    margin-left: 10px;
-    margin-bottom: 20px;
-}
-
-/* Button styling */
-.primary {
-    background: none;
-    border: 2px solid white;
-    height: 40px;
-    color: white;
-    padding: 10px 20px;
-    font-family: 'Alegreya Sans SC', sans-serif;
-    font-size: 18px;
-    cursor: pointer;
-    border-radius: 20px;
-    transition: background 0.3s ease;
-}
-
-.primary:hover {
-    background: linear-gradient(45deg, yellow 24%, orange 100%);
-    color: black;
-    border: none;
-}
-
-
-/* Button Container Styling */
-.action-btn {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 30px;
-}
-
-/* General Button Styling */
-.btn {
-    padding: 10px 20px;
-    border-radius: 20px;
-    font-size: 16px;
-    font-family: 'Alegreya Sans SC', sans-serif;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background-color 0.3s ease, color 0.3s ease;
-    border: 2px solid white;
-    color: white;
-    background: none;
-    width: 45%;
-    text-align: center;
-}
-
-/* Primary Button Styling */
-.btn.primary {
-    background: linear-gradient(45deg, #FFA500 30%, #FFD700 100%);
-    color: black;
-    border: none;
-}
-
-.btn.primary:hover {
-    background: linear-gradient(45deg, #FFD700 30%, #FFA500 100%);
-    color: white;
-}
-
-/* Secondary Button Styling */
-.btn.secondary {
-    background: none;
-    border: 2px solid white;
-    color: white;
-}
-
-.btn.secondary:hover {
-    background: #F08080;
-    color: black;
-    border: none;
-}
-
-/* Mobile Responsive Styling */
-@media (max-width: 768px) {
-    .action-btn {
-        flex-direction: column;
-    }
-
-    .btn {
-        width: 100%;
-        margin-bottom: 10px;
-    }
-}
-
-@media screen and (max-width:990px) and (min-width:665px){
-    .action-btn{
-        margin: 5px;
-        display: block;
-        width: 100%;
-        background-color: #008B8B;
-    }
-
-    .btn{
-        width:100%;
-        margin:5px;
-        padding:5px;
-    }
-} */
-/* Style for the label */
-label {
-    font-size: 16px; /* Change the font size */
-    color: #333; /* Change the text color */
-    font-weight: bold; /* Make the label text bold */
-    margin-right: 10px; /* Add space between label and input */
-}
-
-/* Style for the input field */
-input[type="number"] {
-    width: 100px; /* Set the width of the input field */
-    padding: 5px; /* Add some padding inside the input field */
-    border: 2px solid #ccc; /* Border color and width */
-    border-radius: 4px; /* Rounded corners for the input field */
-    font-size: 14px; /* Font size inside the input field */
-    margin-bottom: 10px; /* Space below the input field */
-    outline: none; /* Remove the default outline */
-}
-
-/* Add focus effect for input field */
-input[type="number"]:focus {
-    border-color: #007bff; /* Change border color when focused */
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Add a subtle shadow */
-}
-/* Style for the label */
-label {
-    font-size: 16px; /* Set the font size */
-    color: #333; /* Set the text color */
-    font-weight: bold; /* Make the label text bold */
-    margin-right: 10px; /* Add space between label and input */
-}
-
-/* Style for the input field */
-input[type="tel"] {
-    width: 150px; /* Set the width of the input field */
-    padding: 8px; /* Add padding inside the input field */
-    border: 2px solid #ccc; /* Set the border color and width */
-    border-radius: 5px; /* Add rounded corners to the input field */
-    font-size: 14px; /* Set the font size inside the input field */
-    margin-bottom: 10px; /* Add space below the input field */
-    outline: none; /* Remove the default outline */
-}
-
-/* Focus effect for the input field */
-input[type="tel"]:focus {
-    border-color: #007bff; /* Change the border color when focused */
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Add a shadow effect when focused */
+.form-container .form-horizontal .form-control select {
+    line-height: 0.5;
 }

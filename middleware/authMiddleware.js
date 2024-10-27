@@ -1,11 +1,12 @@
 const jwt = require("jsonwebtoken");
+const secret = process.env.SECRET;
 
-const User = require("../modals/user.modals");
-const Toastify = require("toastify-js"); 
+const verifyToken = (req, res, next) => {
+  const token =
+    req.cookies.token ||
+    req.query.token ||
+    req.headers["authorization"]?.split(" ")[1];
 
-const authMiddleware = async (req, res, next) => {
-  const token = req.cookies.jwt;
-  console.log("token received", token);
   if (!token) {
     return res.status(401).send("Unauthorized: No token provided");
   }
@@ -14,7 +15,7 @@ const authMiddleware = async (req, res, next) => {
 
   try {
     const verified = jwt.verify(token, secretKey);
-   
+
     req.user = verified;
     next();
   } catch (err) {
@@ -22,4 +23,4 @@ const authMiddleware = async (req, res, next) => {
   }
 };
 
-module.exports = authMiddleware;
+module.exports = { verifyToken };
