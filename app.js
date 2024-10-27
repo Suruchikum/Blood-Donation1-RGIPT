@@ -1,14 +1,11 @@
 const dotenv = require("dotenv").config();
 const path = require("path");
 const nodemailer = require("nodemailer");
-
 const session = require("express-session");
 const cookieParser = require("cookie-parser");
 const flash = require("connect-flash");
 const { query, matchedData, validationResult } = require("express-validator");
 const { verifyToken } = require("./middleware/authMiddleware");
-const { query, matchedData, validationResult } = require("express-validator");
-
 const express = require("express");
 const bodyParser = require("body-parser");
 const sendMail = require("./controllers/indexController").sendMail;
@@ -16,8 +13,6 @@ const mongoose = require("mongoose");
 const User = require("./modals/user.modals");
 const authMiddleware = require("./middleware/authMiddleware");
 
-const session = require("express-session");
-const flash = require("connect-flash");
 const DB = process.env.DATABASE;
 const PORT = process.env.PORT || 4500;
 
@@ -45,7 +40,7 @@ app.use(
 );
 // Configure flash middleware
 app.use(flash());
-app.use(flashMessageMiddleware.flashMessage);
+
 // bootstrap
 app.use("/", express.static("./node_modules/bootstrap/dist/"));
 
