@@ -1,70 +1,82 @@
 const User = require("../modals/user.modals");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const secret = process.env.SECRET;
+const secret = process.env.SECRET_KEY;
+const nodemailer = require("nodemailer");
 
+// const sendMail = async (req, res) => {
+//   let testAccount = await nodemailer.createTestAccount();
+
+//   let transporter = nodemailer.createTransport({
+//     host: "smtp.ethereal.email",
+//     port: 587,
+//     secure: false,
+//     auth: {
+//       user: testAccount.user,
+//       pass: testAccount.pass,
+//     },
+//   });
+
+//   let info = await transporter.sendMail({
+//     from: '"Suruchi Kumari 👻" <suruchikumari1964@gmail.com>',
+//     to: "22it3056@rgipt.ac.in",
+//     subject: "Hello ✔",
+//     text: "Hello world?",
+//     html: "<b>Hello world?</b>",
+//   });
+
+//   console.log("Message sent: %s", info.messageId);
+//   console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+//   res.json({ message: "Email sent successfully", info });
+// };
+
+const sendMail = async (req, res) => {
+  // Manually fixed Ethereal account details yaha daalein
+  let transporter = nodemailer.createTransport({
+    host: "smtp.ethereal.email",
+    port: 587,
+    secure: false,
+    auth: {
+      user: "hipolito.hyatt82@ethereal.email",
+      pass: "XQSReMVTRaW5rvf4yG",
+    },
+  });
+
+  let info = await transporter.sendMail({
+    from: '"Suruchi Kumari 👻" <suruchikumari1964@gmail.com>',
+    to: "22it3056@rgipt.ac.in",
+    subject: "Hello ✔",
+    text: "Hello world?",
+    html: "<b>Hello world?</b>",
+  });
+
+  console.log("Message sent: %s", info.messageId);
+  console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+  res.json({ message: "Email sent successfully", info });
+};
 const handleLogin = async function handleLogin(req, res) {
-  /* const email = req.body.email
-    const password = req.body.password */
-
-  // const {email,password} = req.body
-  // console.log(req.body)
-  // User.find({ email, password}, function (err, user) {
-
-  //     if (err){
-  //         console.log(err);
-  //     }
-  //     else{
-  //         console.log("User is : ", user);
-  //         if(user) {
-  //             const msg = "Valid user"
-  //             return res.status(200).redirect('/donate')
-  //         } else {
-  //             const msg = "Invalid login"
-  //             return res.status(400).redirect('/login')
-  //         }
-  //     }
-  //  });
-  // const { email,password} = req.body
-  // if (error.code === 11000 && error.keyPattern.email === 1) {
-  //   // Display error message to user
-  //   console.log("Email already in use");
-  // } else {
-  //   // Handle other errors
-  //   console.log("error");
-  // }
-  // // console.log(req.body)
-  // try {
-  //   const user=   await User.create(req.body)
-  //   if(user) {
-  //     return res.status(200).redirect('/donate')
-  //   } else {
-  //     return res.status(400).redirect('/login')
-  //   }
-  // } catch(err) {
-  //     console.log('Error in login',err)
-  // }
-  // module.exports ={handleRegister};
   try {
     const { email, password } = req.body;
     // const token = await user.generateAuthToken();
-    // Pehle check karein ki email already exist karta hai ya nahi
+
     const existingUser = await User.findOne({ email: req.body.email });
-    console.log("🚀 ~ existingUser:", existingUser);
+    console.log("User exist", existingUser);
 
     if (existingUser) {
-      // Agar email already exist karta hai
       const match = await bcrypt.compare(password, existingUser.password);
-      // token = await existingUser.generateAuthToken();
-      // console.log(token);
-      // //
 
       if (match) {
         const token = jwt.sign({ existingUserId: existingUser._id }, secret, {
           expiresIn: "1h",
         });
         req.flash("success", "Login Success!");
-        return res.status(200).redirect(`/donate?token=${token}`);
+        // return res.status(200).redirect(`/donate?token=${token}`);
+        res.cookie("jwt", token, {
+          httpOnly: true,
+          secure: process.env.NODE_ENV === "production",
+        });
+
+        return res.status(200).redirect(`/donate`);
       } else {
         req.flash("error", "Invalid password!");
         return res.status(401).redirect("/login");
@@ -73,69 +85,23 @@ const handleLogin = async function handleLogin(req, res) {
     req.flash("error", "User not found!");
     res.status(401).json({ message: "User not found" });
   } catch (err) {
-    // Agar koi aur error hota hai to handle karein
-    // if (err.code === 11000 && err.keyPattern && err.keyPattern.email === 1) {
-    //   res.status(409).send('Duplicate key error: Email already exists');
-    //  else {
-    //     res.status(500).send(err.message);
-    //  }
-
-    // return res.status(401).redirect('/help')
     console.log(err);
     req.flash("error", err.message);
     return res.status(401).redirect("/login");
   }
-  // const token = jwt.sign({userId: user._id},process.env.JWT_SECRET,{
-  //   expiresIn: "1d",
-  // });
-  // return res.status(200).send({
-  //   successs: true,
-  //   message:"Login Successfully",
-  //   token,
-  //   user,
-  // });
-  // function setUser(user){
-  //   return jwt.sign(user,secret);
-
-  //   }
-  //   function getgUser(token){
-  //     return jwt.verify(token,secret);
-  //   }
 };
 const handleLogout = async function handleLogout(req, res) {
-  const token = jwt.sign({ existingUserId: null }, secret, {
-    expiresIn: "-1",
-  });
-  return res.status(200).redirect(`/login?token=${token}`);
+  res.clearCookie("jwt");
+
+  return res.redirect("/");
 };
+
 const handleRegister = async function handleRegister(req, res) {
   const { name, email, password, age, gender, phone, bloodType } = req.body;
   if (!name || !email || !password || !age || !gender || !phone || !bloodType) {
-    return res.status(422).json({ error: "plz filled the properly" });
+    return res.status(422).json({ error: "plz fill all the fields" });
   }
 
-  // console.log(req.body)
-  // try {
-  //   const user=   await User.create(req.body)
-  //   if(user) {
-  //     return res.status(200).redirect('/login')
-  //   } else {
-  //     return res.status(400).redirect('/register')
-  //   }
-  //   const salt = await bcrypt.genSalt(10)
-  //   const hashedPassword=await bcrypt.hash(req.body.password,salt)
-  //   req.body.password=hashedPasseord
-  //   const user1 =new user1model(req.body)
-  //   await user1.save()
-
-  //   return res.status(201).send({
-  //     success:true,
-  //     message:"User Registerd Successfully",
-  //   })
-  // } catch(err) {
-  //     console.log('Error in registeration',err)
-  // }
-  // module.exports ={handleRegister};
   try {
     const userExist = await User.findOne({ email: email });
     if (userExist) {
@@ -147,7 +113,7 @@ const handleRegister = async function handleRegister(req, res) {
       name: name,
       email: email,
       password: password,
-      age: age,
+      dob: dob,
       gender: gender,
       phone: phone,
       bloodType: bloodType,
@@ -161,29 +127,23 @@ const handleRegister = async function handleRegister(req, res) {
     console.log(err);
   }
 };
-// const handleHelp = async function handleHelp(req, res) {
-//   const { name, email, phone, massage } = req.body;
 
-// let isValidUser=true
-// if(isValidUser) {
-//     const msg = "Valid user"
-//     return res.status(200).redirect('/index')
-// } else {
-//     const msg = "Invalid login"
-//     return res.status(400).redirect('/help')
-// }
+const someControllerFunction = (req, res) => {
+  const success = true; // Example logic
 
-// console.log(req.body)
-// try {
-//   const user = await User.create(req.body);
-//   if (user) {
-//     return res.status(200).redirect("/register");
-//   } else {
-//     return res.status(400).redirect("/help");
-//   }
-// } catch (err) {
-//   console.log("Error in help", err);
-// }
-// };
+  if (success) {
+    res.redirect("/donate");
+  } else {
+    res.render("form", {
+      messages: { error_message: "There was an error submitting the form." },
+    });
+  }
+};
 
-module.exports = { handleLogin, handleRegister, handleLogout };
+module.exports = {
+  handleLogin,
+  handleRegister,
+  handleLogout,
+  someControllerFunction,
+  sendMail,
+};

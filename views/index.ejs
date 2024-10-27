@@ -21,10 +21,9 @@
   <body>
     <img src="./images/logorgipt.png" alt="logo" />
     <button onclick="topFunction()" id="myBtn" class="fas fa-arrow-up"></button>
-    <!-- Home Page -->
+
     <header>
-      <!-- <img src="logorgipt.png" alt="logo"> -->
-      <%- include('./partials/navbar') %>
+      <%- include('./partials/navbar.ejs') %>
 
       <video autoplay muted loop plays-inline id="homevideo">
         <source src="./images/homevideo.mp4" t="video/mp4" />
@@ -33,20 +32,6 @@
       <div id="logo">
         <a href="/index"><img src="./images/favicon.png" /></a>
       </div>
-
-      <!--     <div id="nav">
-             <div class="header-list" id="headerl">
-                <i class="fa fa-times" onclick="hideMenu()"></i>
-                <ul>
-                    <li><a class="scroll" href="#about-us">About Us</a></li>
-                    <li><a class="scroll" href="#vol-sect">Volunteer</a></li>
-                    <li><a href="/donate" >Donate</a></li>
-                    <li><a href="/help" >Get Help</a></li>
-                    <li><a href="/login" > Login</a></li>
-                </ul>
-            </div> 
-            <i class="fa fa-bars" onclick="showMenu()"></i>
-        </div> -->
 
       <div class="text-box">
         <h1>Start</h1>
@@ -342,132 +327,9 @@
       </div>
     </footer>
 
-    <!-- <div id="navbar">
-    <a class="active" href="#info">Info</a>
-    <a href="#nearbyBanks">Nearby Blood Banks</a>
-    <a href="#nearbyDonars">Nearby Donars</a>
-    <a href="#footer">Contact</a>
-</div>
+    <script src="./scripts/up.js"></script>
 
-<section id="skills" class="container-fluid text-center">
-
-    <div class="title">
-
-        <h1 class="display-3" id="info">Blood Donation</h1>
-        <p>Blood Donation is for public donation center with blood donation members in the changing health care
-            system.
-            Blood donation is an integral part of the health and well being of the community. The need is constant,
-            and there is no substitute for volunteer blood donations.
-            Every 2 seconds, someone needs a blood transfusion. And, each donation can help save up to three lives.
-            Read below to learn more about donating.</p>
-
-
-
-
-    </div>
-
-    <div class="row">
-        <article class="col-sm-4">
-            <i class="fa fa-thumbs-up"></i>
-            <h2>ELIGIBILTY</h2>
-            <p class="text-muted">Check Eligibity</p>
-            <a href="#" class="btn btn-block" data-toggle="modal" data-target="#eligible">Learn More</a>
-        </article>
-
-        <article class="col-sm-4">
-            <i class="fa fa-user-md"></i>
-            <h2>DOCTORS</h2>
-            <p class="text-muted">Consult a Specialist</p>
-            <a href="#" class="btn btn-block" data-toggle="modal" data-target="#doctor">Learn More</a>
-        </article>
-
-        <article class="col-sm-4">
-            <i class="fa fa-plus-square"></i>
-            <h2>DONARS</h2>
-            <p class="text-muted">Donate Blood</p>
-            <a href="#" class="btn btn-block" data-toggle="modal" data-target="#donars">Learn More</a>
-        </article>
-
-
-    </div>
-
-</section>
-
-<hr style="background-color: darkred; height: 1px; width: 80%">
-<section class="banks" id="nearbyBanks">
-
-    <div class="row">
-        <div class="col-12 text-center">
-            <h3 class="display-2" style="text-shadow: 2px 4px 2px gray;">Nearby Banks</h3><br>
-        </div>
-    </div>
-
-
-
-</section>
-<div id="map" style="width: 100%; height: 600px;"></div>
-
-
-<hr style="background-color: darkred; height: 1px; width: 80%">
-
-<section id="nearbyDonars">
-
-    <div class="conatiner-fluid">
-        <div class="row">
-            <div class="col-12 text-center">
-                <h3 class="display-2" style="text-shadow: 2px 4px 2px gray;">Nearby Donars</h3><br>
-            </div>
-        </div>
-        <div class="row">
-
-            <div class="col-12 container">
-
-                <table class="table table-dark table-striped">
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Age</th>
-                            <th>Blood Group</th>
-                            <th>Last date donated</th>
-                            <th>Contact</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Abhishek Gupta</td>
-                            <td>18</td>
-                            <td>B+</td>
-                            <td>23 March 2018</td>
-                            <td>7545423441&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="fa fa-info"
-                                    data-toggle="modal" data-target="#info1"></span></td>
-                        </tr>
-                        <tr>
-                            <td>Abrar Ahmad Raza</td>
-                            <td>19</td>
-                            <td>A+</td>
-                            <td>11 Feb 2018</td>
-                            <td>8751007246&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="fa fa-info"
-                                    data-toggle="modal" data-target="#info1"></span></td>
-                        </tr>
-                        <tr>
-                            <td>DeshBandhu</td>
-                            <td>18</td>
-                            <td>O+</td>
-                            <td>30 March 2017</td>
-                            <td>9842224581&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="fa fa-info"
-                                    data-toggle="modal" data-target="#info1"></span></td>
-                        </tr>
-                    </tbody>
-                </table>
-                 <center><button class="btn btn-lg btn-success">More</button></center> -->
-
-    <!-- </div>
-        </div>
-
-    </div>
-</section>  -->
-    <!-- Javascript for pre-loader -->
-
+    <script src="./scripts/scroll.js"></script>
     <script>
       const preloader = document.querySelector(".preloader");
       const fadeEffect = setTimeout(() => {
