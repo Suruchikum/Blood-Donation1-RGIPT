@@ -12,7 +12,7 @@ const sendMail = require("./controllers/indexController").sendMail;
 const mongoose = require("mongoose");
 const User = require("./modals/user.modals");
 const authMiddleware = require("./middleware/authMiddleware");
-
+const flashMessageMiddleware = require("./middleware/flashMessage");
 const DB = process.env.DATABASE;
 const PORT = process.env.PORT || 4500;
 
@@ -25,7 +25,6 @@ const app = express();
 
 // establish session
 
-app.use(flash());
 app.use(cookieParser());
 
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -40,6 +39,7 @@ app.use(
 );
 // Configure flash middleware
 app.use(flash());
+app.use(flashMessageMiddleware.flashMessage);
 
 // bootstrap
 app.use("/", express.static("./node_modules/bootstrap/dist/"));
@@ -50,7 +50,7 @@ app.use(
 );
 // Root route
 // console.log(path.join(_dirname, "../BLOOD DONAR"));
-const staticpath = path.join(__dirname, "../RGIPT Blood Donation");
+
 // app.use(express.static(path.join(__dirname, "./public")));
 app.use(express.static(path.resolve("./public")));
 
