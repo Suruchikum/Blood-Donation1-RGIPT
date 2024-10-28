@@ -25,9 +25,16 @@ const userSchema = new mongoose.Schema(
       required: [true, "Password is required"],
     },
 
-    dob: {
-      type: Date,
-      required: [true, 'Date of Birth is required'],
+    // dob: {
+    //   type: Date,
+    //   required: [true, 'Date of Birth is required'],
+    // },
+
+    age: {
+      type: Number,
+      required: [true, "Age is required"],
+      min: [0, "Age cannot be negative"],
+      
     },
     gender: {
       type: String,
@@ -36,11 +43,11 @@ const userSchema = new mongoose.Schema(
     },
     phone: {
       type: Number,
-      required: [true, 'Phone number is required'],
+      required: [true, "Phone number is required"],
       unique: true,
       match: [/^\d{10}$/, "Please enter a valid 10-digit phone number"],
     },
-    bloodType: {
+    bloodGroup: {
       type: String,
       enum: ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"],
       required: true,
