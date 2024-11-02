@@ -170,9 +170,9 @@
                           <label>password</label>
                           <input class="form-control" type="password" placeholder="Password" name="password"
                             id="password_data" required aria-describedby="passwordHelp" />
-                            <span class="input-group-text">
-                              <i class="fa fa-eye" id="togglePassword" style="cursor: pointer"></i>
-                            </span>
+                          <span class="input-group-text">
+                            <i class="fa fa-eye" id="togglePassword" style="cursor: pointer"></i>
+                          </span>
                           <div class="password-meter">
                             <div class="meter-section rounded me-2"></div>
                             <div class="meter-section rounded me-2"></div>
@@ -184,8 +184,8 @@
                             Use 8 or more characters with a mix of letters, numbers &
                             symbols.
                           </div>
-                          
- 
+
+
 
 
                           <!-- id="password_data" -->
@@ -268,63 +268,92 @@
     //   "showConfirmPassword"
     // );
 
-    document
-      .getElementById("registerForm")
-      .addEventListener("submit", function (event) {
-        const password = document.getElementById("password_data").value;
+    // document
+    //   .getElementById("registerForm")
+    //   .addEventListener("submit", function (event) {
+    //     const password = document.getElementById("password_data").value;
 
+    //       });
+
+        
+
+
+    //     const confirmPassword =
+    //       document.getElementById("confirmPassword").value;
+    //     const phone = document.getElementById("phone").value;
+    document.addEventListener("DOMContentLoaded", () => {
+        const confirmPasswordField = document.getElementById("confirmPassword");
+        const phoneField = document.getElementById("phone");
+        const passwordField = document.getElementById("password_data");
+
+        document
+          .getElementById("togglePassword")
+          .addEventListener("click", function (e) {
+            e.preventDefault();
+            const toggleIcon = this;
+            if (passwordField.type === "password") {
+              passwordField.type = "text";
+              toggleIcon.classList.remove("fa-eye");
+              toggleIcon.classList.add("fa-eye-slash");
+            } else {
+              passwordField.type = "password";
+              toggleIcon.classList.remove("fa-eye-slash");
+              toggleIcon.classList.add("fa-eye");
+            }
+          });
+
+        document
+          .getElementById("registerForm")
+          .addEventListener("submit", function (event) {
+
+        // Validate password and confirm password match
+        // if (password !== confirmPassword) {
+        //   alert("Passwords do not match. Please try again.");
+        //   event.preventDefault();
+        //   return;
+        // }
+        // Validate password and confirm password match
+        // if (password !== confirmPassword) {
+        //   alert("Passwords do not match. Please try again.");
+        //   event.preventDefault();
+        //   return;
+        // }
+
+        // Validate phone number format (10 digits)
+        // function validatePhone(phone) {
+        //   const re = /^\d{10}$/;
+        //   return re.test(phone);
+        // }
+        // Validate phone number format (10 digits)
+        // function validatePhone(phone) {
+        //   const re = /^\d{10}$/;
+        //   return re.test(phone);
+        // }
+
+        // if (!validatePhone(phone)) {
+        //   alert("Please enter a valid phone number.");
+        //   event.preventDefault();
+        //   return;
+        // }
+        if (passwordField.value !== confirmPasswordField.value) {
+              event.preventDefault();
+              alert("Passwords do not match. Please try again.");
+              return;
+            }
+
+            function validatePhone(phone) {
+              const re = /^\d{10}$/;
+              return re.test(phone);
+            }
+
+            if (!validatePhone(phoneField.value)) {
+              event.preventDefault();
+              alert("Please enter a valid phone number.");
+              return;
+            }
+          });
       });
-
-      document.getElementById('togglePassword').addEventListener('click', function () {
-    const passwordField = document.getElementById('password_data');
-    const toggleIcon = document.getElementById('togglePassword');
-    
-
-    if (passwordField.type === 'password') {
-      passwordField.type = 'text';
-      toggleIcon.classList.remove('fa-eye');
-      toggleIcon.classList.add('fa-eye-slash'); 
-      passwordField.type = 'password';
-      toggleIcon.classList.remove('fa-eye-slash');
-      toggleIcon.classList.add('fa-eye'); 
-    }
-  });
-
-
-    const confirmPassword =
-      document.getElementById("confirmPassword").value;
-    const phone = document.getElementById("phone").value;
-
-    // Validate password and confirm password match
-    if (password !== confirmPassword) {
-      alert("Passwords do not match. Please try again.");
-      event.preventDefault();
-      return;
-    }
-    // Validate password and confirm password match
-    if (password !== confirmPassword) {
-      alert("Passwords do not match. Please try again.");
-      event.preventDefault();
-      return;
-    }
-
-    // Validate phone number format (10 digits)
-    function validatePhone(phone) {
-      const re = /^\d{10}$/;
-      return re.test(phone);
-    }
-    // Validate phone number format (10 digits)
-    function validatePhone(phone) {
-      const re = /^\d{10}$/;
-      return re.test(phone);
-    }
-
-    if (!validatePhone(phone)) {
-      alert("Please enter a valid phone number.");
-      event.preventDefault();
-      return;
-    }
-      });
+      
   </script>
   <script src="./scripts/passwordStrength.js"></script>
 </body>
