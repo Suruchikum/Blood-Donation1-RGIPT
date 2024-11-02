@@ -98,70 +98,43 @@
         }
     } */
      -->
-<link rel="stylesheet" href="./css/partials/navbar.css" />
-<nav>
-  <div id="nav">
-    <div class="header-list1" id="headerl">
-      <ul>
-        <li><a class="scroll" href="#about-us">About Us</a></li>
 
-        <li><a href="/donate">Donate</a></li>
 
-        <li><a href="/register">Register</a></li>
-        <li><a href="/login">Login</a></li>
-        <li><a href="/blood-group-count">Blood Group Count</a></li>
-        <li><a href="/dashboard">Dashboard</a></li>
-      </ul>
-    </div>
-  </div>
-</nav>
-<link rel="stylesheet" href="./css/navbar.css" />
+    <link rel="stylesheet" href="./css/partials/navbar.css" />
 
-<% if(successFlashMessage){ %>
-<div class="alert alert-success">
-  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
-    &times;
-  </button>
-  <%=successFlashMessage%>
-</div>
-<% } %> <% if(errorFlashMessage){ %>
-<div class="alert alert-error">
-  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
-    &times;
-  </button>
-  <%=errorFlashMessage%>
-</div>
-<% } %>
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Responsive Navbar</title>
-    <link rel="stylesheet" href="../partials/navbar.css">
-    
-</head>
-<body>
 
     <nav>
         <div id="nav">
             <div class="header-list1" id="headerl">
-                <i class="fas fa-times" id="closeMenu" onclick="hideMenu()"></i> Close icon for mobile -->
-<!-- <ul>
+                <ul>
                     <li><a class="scroll" href="#about-us">About Us</a></li>
+
                     <li><a href="/donate">Donate</a></li>
+
                     <li><a href="/register">Register</a></li>
                     <li><a href="/login">Login</a></li>
+                    <!-- <li><a href="/blood-group-count">Blood Group Count</a></li>
+        <li><a href="/dashboard">Dashboard</a></li> -->
                 </ul>
             </div>
-            <i class="fas fa-bars" id="openMenu" onclick="showMenu()"></i>  Hamburger menu icon for mobile -->
-<!-- </div>
+        </div>
     </nav>
+    <!-- <link rel="stylesheet" href="./css/navbar.css" /> -->
 
-    
+    <% if(successFlashMessage){ %>
+        <div class="alert alert-success">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+                &times;
+            </button>
+            <%=successFlashMessage%>
+        </div>
+        <% } %>
+            <% if(errorFlashMessage){ %>
+                <div class="alert alert-error">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+                        &times;
+                    </button>
+                    <%=errorFlashMessage%>
+                </div>
+                <% } %>
 
-</body> -->
-<!-- </html> -->
-
-<!-- <script src="./scripts/navbar.js"></script>
-     -->

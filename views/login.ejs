@@ -19,7 +19,7 @@
       <h1 class="text-white">
         <span class="text-danger fs-1 fw-bolder font-monospace">Login</span>
         to<br />
-        Your Lifesaving Account
+        Your Life saving Account
       </h1>
     </header>
 
@@ -78,15 +78,23 @@
                 </div>
                 <div class="form-group">
                   <label>password</label>
-                  <input
-                    class="form-control"
-                    type="password"
-                    placeholder="password"
-                    id="loginPassword"
-                    name="password"
-                  />
+                  <div class="input-group">
+                    <input
+                      class="form-control"
+                      type="password"
+                      placeholder="password"
+                      id="loginPassword"
+                      name="password"
+                    />
+                    <span class="input-group-text">
+                      <i
+                        class="fa fa-eye"
+                        id="togglePassword"
+                        style="cursor: pointer"
+                      ></i>
+                    </span>
+                  </div>
                 </div>
-
                 <button type="submit" class="btn btn-default">Login</button>
               </form>
               <p class="mt-2">
@@ -100,6 +108,28 @@
         </div>
       </div>
     </div>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const passwordField = document.getElementById("loginPassword");
+        document
+          .getElementById("togglePassword")
+          .addEventListener("click", function (e) {
+            e.preventDefault();
+
+            const toggleIcon = this;
+
+            if (passwordField.type === "password") {
+              passwordField.type = "text";
+              toggleIcon.classList.remove("fa-eye");
+              toggleIcon.classList.add("fa-eye-slash");
+            } else {
+              passwordField.type = "password";
+              toggleIcon.classList.remove("fa-eye-slash");
+              toggleIcon.classList.add("fa-eye");
+            }
+          });
+      });
+    </script>
     <script src="/js/bootstrap.js"></script>
   </body>
 </html>

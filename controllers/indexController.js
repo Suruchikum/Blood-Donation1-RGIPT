@@ -4,58 +4,44 @@ const jwt = require("jsonwebtoken");
 const secret = process.env.SECRET_KEY;
 const nodemailer = require("nodemailer");
 
-// const sendMail = async (req, res) => {
-//   let testAccount = await nodemailer.createTestAccount();
+const sendMail = async (message, recepient) => {
+  
 
-//   let transporter = nodemailer.createTransport({
-//     host: "smtp.ethereal.email",
-//     port: 587,
-//     secure: false,
-//     auth: {
-//       user: testAccount.user,
-//       pass: testAccount.pass,
-//     },
-//   });
-
-//   let info = await transporter.sendMail({
-//     from: '"Suruchi Kumari 👻" <suruchikumari1964@gmail.com>',
-//     to: "22it3056@rgipt.ac.in",
-//     subject: "Hello ✔",
-//     text: "Hello world?",
-//     html: "<b>Hello world?</b>",
-//   });
-
-//   console.log("Message sent: %s", info.messageId);
-//   console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
-//   res.json({ message: "Email sent successfully", info });
-// };
-
-const sendMail = async (req, res) => {
-  // Manually fixed Ethereal account details yaha daalein
-  let transporter = nodemailer.createTransport({
-    host: "smtp.ethereal.email",
-    port: 587,
-    secure: false,
+  const transporter = nodemailer.createTransport({
+    host: "smtp.gmail.com",
+    port: 465,
+    secure: true,
     auth: {
-      user: "hipolito.hyatt82@ethereal.email",
-      pass: "XQSReMVTRaW5rvf4yG",
-    },
+      type: "OAuth2",
+      user: process.env.MAIL_USERNAME,      
+      accessToken: "ya29.a0AeDClZCM_zrNPgS0p6Plf3HXg8ALBAq4eeUQxhGJSJTnWOjzkhOS416sL3xCUAc-q6gCDDOdNxJ2Ya9OcK3SPfrOBQtwW0DYoesQfXFhRHxkUoFlPhCW5QqPNM1IoO_ATyjhEkbHRpikRJpfd-5_NxJeUPhysf9Jgmb8iucQvgaCgYKAckSARISFQHGX2MisCpYAjm3wEr5mA-2EIEV2w0177",
+      },
   });
-
-  let info = await transporter.sendMail({
-    from: '"Suruchi Kumari 👻" <suruchikumari1964@gmail.com>',
-    to: "22it3056@rgipt.ac.in",
-    subject: "Hello ✔",
-    text: "Hello world?",
-    html: "<b>Hello world?</b>",
-  });
-
-  console.log("Message sent: %s", info.messageId);
-  console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
-  res.json({ message: "Email sent successfully", info });
+  
+  let mailOptions = {
+    from: process.env.MAIL_USERNAME,
+    to: recepient,
+    bcc:process.env.MAIL_BCC,
+    subject: "Blood Donation: Login Access",
+    text: message,
+  };
+  transporter.sendMail(mailOptions, function (err, data) {
+   
+    
+    if (err) {
+      console.log(err)
+      return {success:false, message:err}
+    } else {  
+      console.log(`Mail sent to ${data.accepted}`)   
+      return {success:true, message:data}
+    }
+  });  
+  
+  
 };
 const handleLogin = async function handleLogin(req, res) {
-  try {
+  try { 
+    
     const { email, password } = req.body;
     // const token = await user.generateAuthToken();
 
@@ -76,14 +62,23 @@ const handleLogin = async function handleLogin(req, res) {
           secure: process.env.NODE_ENV === "production",
         });
 
+        // Send mail to user
+        const mailMessage= `${email} has sucessfully accessed to "Blood Donation" website.`
+       /*
+        TODO : send mail via API key or autorefresh token
+       */
+        // await sendMail(mailMessage,email);       
+       
+
         return res.status(200).redirect(`/donate`);
       } else {
         req.flash("error", "Invalid password!");
         return res.status(401).redirect("/login");
       }
+    } else {
+      req.flash("error", "User not found!");
+      return res.status(401).redirect("/login");
     }
-    req.flash("error", "User not found!");
-    res.status(401).json({ message: "User not found" });
   } catch (err) {
     console.log(err);
     req.flash("error", err.message);
@@ -97,8 +92,17 @@ const handleLogout = async function handleLogout(req, res) {
 };
 
 const handleRegister = async function handleRegister(req, res) {
-  const { name, email, password, age, gender, phone, bloodType } = req.body;
-  if (!name || !email || !password || !age || !gender || !phone || !bloodType) {
+  // bloodgroup optional as user may not know bloodgroup at register time
+  const { name, email, password, age, gender, phone } = req.body;
+  if (
+    !name ||
+    !email ||
+    !password ||
+    !age ||
+    !gender ||
+    !phone 
+    
+  ) {
     return res.status(422).json({ error: "plz fill all the fields" });
   }
 
@@ -108,20 +112,16 @@ const handleRegister = async function handleRegister(req, res) {
       req.flash("error", "Email already Exist");
       return res.status(422).json({ error: "Email already Exist" });
     }
-
-    const user = new User({
-      name: name,
-      email: email,
-      password: password,
-      dob: dob,
-      gender: gender,
-      phone: phone,
-      bloodType: bloodType,
-    });
+    const userData = {name,email,password,age, gender,phone}
+    if(req.body.bloodGroup) {
+      userData.bloodGroup = req.body.bloodGroup
+    }
+    const user = new User(userData);
     console.log("Gender:", req.body.gender);
     await user.save();
     req.flash("success", "User registered successfully");
-    res.status(201).json({ message: "user registered successfuly" });
+    // res.status(201).json({ message: "user registered successfuly" });
+    res.redirect("/")
   } catch (err) {
     req.flash("error", err.message);
     console.log(err);

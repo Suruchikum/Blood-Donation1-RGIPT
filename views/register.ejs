@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Start Saving Lives-Register</title>
-    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
 
     <!-- Font Icon -->
     <link href="/fa/font-awesome.css" rel="stylesheet" type="text/css" />
@@ -23,111 +23,6 @@
         Start Saving Lives
       </h1>
     </header>
-
-    <!-- <div class="inner">
-      <div class="user-form">
-        <h1>Start Saving Lives</h1>
-        <form id="registerForm" action="/register" method="post">
-          <i class="fas fa-user icon"></i>
-          <input type="text" name="name" placeholder="Name" required /><br />
-
-                <i class="fas fa-envelope-square"></i>
-                <input
-                  type="email"
-                  placeholder="E-mail"
-                  name="email"
-                  required
-                /><br />
-
-                <input
-                  type="password"
-                  placeholder="Password"
-                  name="password"
-                  id="password_data"
-                  required
-                /><br />
-                <input type="checkbox" id="showPassword" />Show Password
-
-                <input
-                  type="password"
-                  placeholder="Confirm Password"
-                  name="confirmPassword"
-                  id="confirmPassword"
-                  required
-                /><br />
-                <input type="checkbox" id="showConfirmPassword" />Show Password
-                <i class="fas fa-envelope-square"></i>
-                <input
-                  type="email"
-                  placeholder="E-mail"
-                  name="email"
-                  required
-                /><br />
-
-                <input
-                  type="password"
-                  placeholder="Password"
-                  name="password"
-                  id="password_data"
-                  required
-                /><br />
-                <input type="checkbox" id="showPassword" />Show Password
-
-                <input
-                  type="password"
-                  placeholder="Confirm Password"
-                  name="confirmPassword"
-                  id="confirmPassword"
-                  required
-                /><br />
-                <input type="checkbox" id="showConfirmPassword" />Show Password
-
-                <div
-                  class="safety"
-                  style="font-family: sans-serif; font-size: 20px"
-                ></div>
-
-                <label for="dob">Date of Birth:</label>
-                <input type="date" id="dob" name="dob" required /><br />
-
-                <div
-                  class="safety"
-                  style="font-family: sans-serif; font-size: 20px"
-                ></div>
-
-                <label for="age">Age:</label>
-                <input type="number" id="age" name="age" required /><br />
-
-                <label for="gender">Gender:</label>
-                <select id="gender" name="gender" required>
-                  <option value="male">Male</option>
-                  <option value="female">Female</option>
-                  <option value="other">Other</option></select
-                ><br />
-
-                <label for="bloodType">Blood Type:</label>
-                <select id="bloodType" name="bloodType" required>
-                  <option value="O+">O+</option>
-                  <option value="O-">O-</option>
-                  <option value="A+">A+</option>
-                  <option value="A-">A-</option>
-                  <option value="B+">B+</option>
-                  <option value="B-">B-</option>
-                  <option value="AB+">AB+</option>
-                  <option value="AB-">AB-</option></select
-                ><br />
-
-                <label for="phone">Phone:</label>
-                <input type="tel" id="phone" name="phone" required /><br />
-
-          <div class="action-btn">
-            <button type="submit" class="btn primary">Create Account</button>
-            <button type="button" class="btn">Skip</button>
-          </div>
-        </form>
-      </div>
-    </div> -->
-
     <!-- register code -->
     <div>
       <div class="container py-5 h-100">
@@ -147,6 +42,7 @@
                 aria-label="Close"
               ></button>
             </div>
+
             <% } %> <% if(errorFlashMessage){ %>
             <div
               class="alert alert-danger alert-dismissible fade show"
@@ -197,25 +93,37 @@
                 <div class="row">
                   <div class="form-group col-md-6">
                     <label>password</label>
-                    <input
-                      class="form-control"
-                      type="password"
-                      placeholder="Password"
-                      name="password"
-                      id="password_data"
-                      required
-                      aria-describedby="passwordHelp"
-                    />
+                    <div class="input-group">
+                      <input
+                        class="form-control"
+                        type="password"
+                        placeholder="Password"
+                        name="password"
+                        id="password_data"
+                        required
+                        aria-describedby="passwordHelp"
+                      />
+                      <span class="input-group-text">
+                        <i
+                          class="fa fa-eye"
+                          id="togglePassword"
+                          style="cursor: pointer"
+                        ></i>
+                      </span>
+                    </div>
+
                     <div class="password-meter">
                       <div class="meter-section rounded me-2"></div>
                       <div class="meter-section rounded me-2"></div>
                       <div class="meter-section rounded me-2"></div>
                       <div class="meter-section rounded"></div>
                     </div>
+
                     <div id="passwordHelp" class="form-text text-muted">
                       Use 8 or more characters with a mix of letters, numbers &
                       symbols.
                     </div>
+
                     <!-- id="password_data" -->
                   </div>
                   <div class="form-group col-md-6">
@@ -240,6 +148,19 @@
                       name="age"
                       required
                     />
+                    <!-- <div class="row">
+                      <div class="form-group col-md-6">
+                        <label>Date of Birth</label>
+                        <input
+                          id="dob"
+                          class="form-control"
+                          type="date"
+                          name="dob"
+                          placeholder="Enter Date of Birth"
+                          required
+                        />
+                      </div>
+                    </div> -->
                   </div>
                   <div class="form-group col-md-6">
                     <label>Gender</label>
@@ -272,6 +193,7 @@
                       type="tel"
                       placeholder="10 digit phone no"
                       name="phone"
+                      id="phone"
                       required
                     />
                   </div>
@@ -292,51 +214,51 @@
     </div>
 
     <script>
-      // const passwordInput = document.getElementById("password_data");
-      const confirmPasswordInput = document.getElementById("confirmPassword");
-      const showPasswordCheckbox = document.getElementById("showPassword");
-      const showConfirmPasswordCheckbox = document.getElementById(
-        "showConfirmPassword"
-      );
+      document.addEventListener("DOMContentLoaded", () => {
+        const confirmPasswordField = document.getElementById("confirmPassword");
+        const phoneField = document.getElementById("phone");
+        const passwordField = document.getElementById("password_data");
 
-      document
-        .getElementById("registerForm")
-        .addEventListener("submit", function (event) {
-          const password = document.getElementById("password_data").value;
-          const confirmPassword =
-            document.getElementById("confirmPassword").value;
-          const phone = document.getElementById("phone").value;
+        document
+          .getElementById("togglePassword")
+          .addEventListener("click", function (e) {
+            e.preventDefault();
+            const toggleIcon = this;
+            if (passwordField.type === "password") {
+              passwordField.type = "text";
+              toggleIcon.classList.remove("fa-eye");
+              toggleIcon.classList.add("fa-eye-slash");
+            } else {
+              passwordField.type = "password";
+              toggleIcon.classList.remove("fa-eye-slash");
+              toggleIcon.classList.add("fa-eye");
+            }
+          });
 
-          // Validate password and confirm password match
-          if (password !== confirmPassword) {
-            alert("Passwords do not match. Please try again.");
-            event.preventDefault();
-            return;
-          }
-          // Validate password and confirm password match
-          if (password !== confirmPassword) {
-            alert("Passwords do not match. Please try again.");
-            event.preventDefault();
-            return;
-          }
+        document
+          .getElementById("registerForm")
+          .addEventListener("submit", function (event) {
+            // Validate password and confirm password match
+            if (passwordField.value !== confirmPasswordField.value) {
+              event.preventDefault();
+              alert("Passwords do not match. Please try again.");
+              return;
+            }
 
-          // Validate phone number format (10 digits)
-          function validatePhone(phone) {
-            const re = /^\d{10}$/;
-            return re.test(phone);
-          }
-          // Validate phone number format (10 digits)
-          function validatePhone(phone) {
-            const re = /^\d{10}$/;
-            return re.test(phone);
-          }
+            function validatePhone(phone) {
+              const re = /^\d{10}$/;
+              return re.test(phone);
+            }
 
-          if (!validatePhone(phone)) {
-            alert("Please enter a valid phone number.");
-            event.preventDefault();
-            return;
-          }
-        });
+            if (!validatePhone(phoneField.value)) {
+              event.preventDefault();
+              alert("Please enter a valid phone number.");
+              return;
+            }
+          });
+      });
+
+      // Validate phone number format (10 digits)
     </script>
     <script src="./scripts/passwordStrength.js"></script>
   </body>

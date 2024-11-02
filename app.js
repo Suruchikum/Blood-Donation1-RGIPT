@@ -21,11 +21,14 @@ mongoose.connect(DB);
 const indexRoutes = require("./routes/indexRoutes");
 
 const staticpath = path.join(__dirname, "../RGIPT Blood Donation");
+
 const app = express();
 
 // establish session
 
 app.use(cookieParser());
+
+
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -65,52 +68,15 @@ app.get("/index", (req, res) => {
   res.render("index");
 });
 
-// app.get("/help", (req, res) => {
-//   res.render("help");
-// });
+
 
 app.get("/donate", verifyToken, (req, res) => {
   res.render("donate", { token: req.query.token });
 });
 
 app.use("/", indexRoutes);
-// app.get("/about", (req, res) => {
-//   res.status(200).json({
-//     message: " Hello About Welcome to Blood Donar",
-//   });
-//   // res.send("Welcome to about page ")
-// });
-// app.get("/volunteer", (req, res) => {
-//   res.status(200).json({
-//     message: " Hello Volunteer Welcome to Blood Donor",
-//   });
-//   // res.send(" Welcome to Volunteers  page")
-// });
-// app.get("/donate", (req, res) => {
-//   res.status(304).json({
-//     message: " Hello Donate Welcome to Blood Donor",
-//     // res.send({
-//     //     id:2,
-//     //     name:"suruchi",
-//   });
 
-// });
-// res.send(" Welcome to donate page")
-// });
-// });
 
-// app.get("/help", (req, res) => {
-//   res.status(200).json({
-//     message: " Hello Help Welcome to Blood Donor",
-//     // });
-//     // res.send(" Welcome to help page")
-//   });
-// });
-// app.get("*",(req,res)=>{
-//   res.send("404 error page")
-// });
-
-// const PORT = 5500;
 
 app.use(express.json());
 app.use(flash());
