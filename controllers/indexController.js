@@ -59,8 +59,8 @@ const handleLogin = async function handleLogin(req, res) {
     const { email, password } = req.body;
     // const token = await user.generateAuthToken();
 
-    const existingUser = await User.findOne({ email: req.body.email });
-    console.log("User exist", existingUser);
+    const existingUser = await User.findOne({ email });
+    console.log("User exist", existingUser, email);
 
     if (existingUser) {
       const match = await bcrypt.compare(password, existingUser.password);

@@ -27,7 +27,7 @@ const userSchema = new mongoose.Schema(
 
     dob: {
       type: Date,
-      required: [true, 'Date of Birth is required'],
+      required: [true, "Date of Birth is required"],
     },
     gender: {
       type: String,
@@ -36,7 +36,7 @@ const userSchema = new mongoose.Schema(
     },
     phone: {
       type: Number,
-      required: [true, 'Phone number is required'],
+      required: [true, "Phone number is required"],
       unique: true,
       match: [/^\d{10}$/, "Please enter a valid 10-digit phone number"],
     },

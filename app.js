@@ -32,7 +32,7 @@ app.use(bodyParser.json());
 // establish session
 app.use(
   session({
-    secret: process.env.SECRET,
+    secret: process.env.SECRET_KEY,
     saveUninitialized: true,
     resave: true,
   })
