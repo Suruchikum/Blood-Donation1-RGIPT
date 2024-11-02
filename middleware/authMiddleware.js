@@ -6,12 +6,10 @@ const verifyToken = (req, res, next) => {
     req.cookies.jwt ||
     req.query.token ||
     req.headers["authorization"]?.split(" ")[1];
-   
-   
+
   if (!token) {
     return res.status(401).send("Unauthorized: No token provided");
   }
-
 
   try {
     const verified = jwt.verify(token, secret);
