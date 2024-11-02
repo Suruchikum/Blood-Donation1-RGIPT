@@ -18,6 +18,7 @@ body{
     border-radius: 20px;
     box-shadow: 14px 14px 20px #cbced1, -14px -14px 20px white;
 }
+
 .form-container .form-icon{
     color: #ac40ab;
     font-size: 55px;
@@ -88,4 +89,9 @@ body{
 
 .form-container .form-horizontal .form-control select {
     line-height: 0.5;
+}
+#showPassword {
+    font-size: 16px;
+    margin-left: 10px;
+    color: #333;
 }

@@ -34,6 +34,35 @@
         <a href="/index"><img src="./images/favicon.png" /></a>
       </div>
 
+      <!-- show error or success -->
+      <% if(successFlashMessage){ %>
+        <div
+          class="alert alert-success alert-dismissible fade show"
+          role="alert"
+        >
+          <%= successFlashMessage %>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="alert"
+            aria-label="Close"
+          ></button>
+        </div>
+        <% } %> <% if(errorFlashMessage){ %>
+        <div
+          class="alert alert-danger alert-dismissible fade show"
+          role="alert"
+        >
+          <%= errorFlashMessage %>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="alert"
+            aria-label="Close"
+          ></button>
+        </div>
+        <% } %>
+
       <div class="text-box">
         <h1>Start</h1>
         <h1>Saving Lives</h1>

@@ -64,7 +64,10 @@ const handleLogin = async function handleLogin(req, res) {
 
         // Send mail to user
         const mailMessage= `${email} has sucessfully accessed to "Blood Donation" website.`
-        await sendMail(mailMessage,email);       
+       /*
+        TODO : send mail via API key or autorefresh token
+       */
+        // await sendMail(mailMessage,email);       
        
 
         return res.status(200).redirect(`/donate`);
@@ -89,15 +92,16 @@ const handleLogout = async function handleLogout(req, res) {
 };
 
 const handleRegister = async function handleRegister(req, res) {
-  const { name, email, password, age, gender, phone, bloodGroup } = req.body;
+  // bloodgroup optional as user may not know bloodgroup at register time
+  const { name, email, password, age, gender, phone } = req.body;
   if (
     !name ||
     !email ||
     !password ||
     !age ||
     !gender ||
-    !phone ||
-    !bloodGroup
+    !phone 
+    
   ) {
     return res.status(422).json({ error: "plz fill all the fields" });
   }
@@ -108,20 +112,16 @@ const handleRegister = async function handleRegister(req, res) {
       req.flash("error", "Email already Exist");
       return res.status(422).json({ error: "Email already Exist" });
     }
-
-    const user = new User({
-      name: name,
-      email: email,
-      password: password,
-      age: age,
-      gender: gender,
-      phone: phone,
-      bloodGroup: bloodGroup,
-    });
+    const userData = {name,email,password,age, gender,phone}
+    if(req.body.bloodGroup) {
+      userData.bloodGroup = req.body.bloodGroup
+    }
+    const user = new User(userData);
     console.log("Gender:", req.body.gender);
     await user.save();
     req.flash("success", "User registered successfully");
-    res.status(201).json({ message: "user registered successfuly" });
+    // res.status(201).json({ message: "user registered successfuly" });
+    res.redirect("/")
   } catch (err) {
     req.flash("error", err.message);
     console.log(err);
