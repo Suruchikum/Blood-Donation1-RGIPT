@@ -149,6 +149,8 @@
     "getpass": "^0.1.7",
     "glob": "^7.2.3",
     "glob-parent": "^5.1.2",
+    "google-auth-library": "^9.14.2",
+    "googleapis": "^144.0.0",
     "gopd": "^1.0.1",
     "got": "^7.1.0",
     "graceful-fs": "^4.2.11",

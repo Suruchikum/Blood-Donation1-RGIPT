@@ -2,23 +2,8 @@ const User = require("../modals/user.modals");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const secret = process.env.SECRET_KEY;
-const { transporter, mailOptions } = require("../config/gmail");
+const { sendMail } = require("../config/gmail");
 
-const sendMail = async (subject, message, recepient) => {
-  let emailOptions = mailOptions;
-  emailOptions.subject = subject;
-  emailOptions.text = message;
-  emailOptions.to = recepient;
-  transporter.sendMail(emailOptions, function (err, data) {
-    if (err) {
-      console.log(err);
-      return { success: false, message: err };
-    } else {
-      console.log(`Mail sent to ${data.accepted}`);
-      return { success: true, message: data };
-    }
-  });
-};
 const handleLogin = async function handleLogin(req, res) {
   try {
     const { email, password } = req.body;
@@ -42,15 +27,16 @@ const handleLogin = async function handleLogin(req, res) {
         });
 
         // Send mail to user
-        const mailMessage = `${email} has sucessfully accessed to ${process.env.APPNAME} website.`;
-        /*
-        TODO : send mail via API key or autorefresh token
-       */
-        await sendMail(
-          `${process.env.APPNAME}: LOGIN Access`,
-          mailMessage,
-          email
-        );
+        const subject = "Welcome Back!";
+        const message = `Thank you for logging into ${process.env.APPNAME} website.!`;
+        const recipient = email;
+
+        const mailResult = await sendMail(subject, message, recipient);
+        if (mailResult.success) {
+          console.log("Email sent successfully");
+        } else {
+          console.log("Failed to send email:", mailResult.message);
+        }
 
         return res.status(200).redirect(`/donate`);
       } else {
