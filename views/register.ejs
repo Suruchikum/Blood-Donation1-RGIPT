@@ -1,83 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Start Saving Lives-Register</title>
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
 
-    <!-- Font Icon -->
-    <link href="/fa/font-awesome.css" rel="stylesheet" type="text/css" />
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Start Saving Lives-Register</title>
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
 
-    <!-- Main css -->
-    <link rel="stylesheet" href="css/register.css" />
-    <link rel="stylesheet" href="css/passwordStrength.css" />
-  </head>
+  <!-- Font Icon -->
+  <link href="/fa/font-awesome.css" rel="stylesheet" type="text/css" />
 
-  <body>
-    <header class="m-3">
-      <h1 class="text-white">
-        <span class="text-danger fs-1 fw-bolder font-monospace">Register</span>
-        & <br />
-        Start Saving Lives
-      </h1>
-    </header>
-    <!-- register code -->
-    <div>
-      <div class="container py-5 h-100">
-        <div class="row d-flex align-items-center justify-content-center h-100">
-          <div class="col-12 col-md-8">
-            <!-- show error or success -->
-            <% if(successFlashMessage){ %>
-            <div
-              class="alert alert-success alert-dismissible fade show"
-              role="alert"
-            >
+  <!-- Main css -->
+  <link rel="stylesheet" href="css/register.css" />
+  <link rel="stylesheet" href="css/passwordStrength.css" />
+</head>
+
+<body>
+  <header class="m-3">
+    <h1 class="text-white">
+      <span class="text-danger fs-1 fw-bolder font-monospace">Register</span>
+      & <br />
+      Start Saving Lives
+    </h1>
+  </header>
+  <!-- register code -->
+  <div>
+    <div class="container py-5 h-100">
+      <div class="row d-flex align-items-center justify-content-center h-100">
+        <div class="col-12 col-md-8">
+          <!-- show error or success -->
+          <% if(successFlashMessage){ %>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
               <%= successFlashMessage %>
-              <button
-                type="button"
-                class="btn-close"
-                data-bs-dismiss="alert"
-                aria-label="Close"
-              ></button>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
 
-            <% } %> <% if(errorFlashMessage){ %>
-            <div
-              class="alert alert-danger alert-dismissible fade show"
-              role="alert"
-            >
-              <%= errorFlashMessage %>
-              <button
-                type="button"
-                class="btn-close"
-                data-bs-dismiss="alert"
-                aria-label="Close"
-              ></button>
-            </div>
             <% } %>
+              <% if(errorFlashMessage){ %>
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                  <%= errorFlashMessage %>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                <% } %>
 
-            <div class="form-container">
-              <div class="form-icon"><i class="fa fa-user"></i></div>
-              <h3 class="title">Register Here</h3>
-              <form
-                class="form-horizontal"
-                id="registerForm"
-                action="/register"
-                method="post"
-              >
-                <div class="row">
-                  <div class="form-group col-md-6">
-                    <label>name</label>
-                    <input
-                      class="form-control"
-                      type="text"
-                      placeholder="Full name"
-                      name="name"
-                      required
-                    />
-                  </div>
+                  <div class="form-container">
+                    <div class="form-icon"><i class="fa fa-user"></i></div>
+                    <h3 class="title">Register Here</h3>
+                    <form class="form-horizontal" id="registerForm" action="/register" method="post">
+                      <div class="row">
+                        <div class="form-group col-md-6">
+                          <label>name</label>
+                          <input class="form-control" type="text" placeholder="Full name" name="name" required />
+                        </div>
 
                         <div class="form-group col-md-6">
                           <label>email</label>
@@ -87,11 +62,14 @@
                       <div class="row">
                         <div class="form-group col-md-6">
                           <label>password</label>
-                          <input class="form-control" type="password" placeholder="Password" name="password"
-                            id="password_data" required aria-describedby="passwordHelp" />
+                          <div class="input-group">
+                            <input class="form-control" type="password" placeholder="Password" name="password"
+                              id="password_data" required aria-describedby="passwordHelp" />
                             <span class="input-group-text">
                               <i class="fa fa-eye" id="togglePassword" style="cursor: pointer"></i>
                             </span>
+                          </div>
+
                           <div class="password-meter">
                             <div class="meter-section rounded me-2"></div>
                             <div class="meter-section rounded me-2"></div>
@@ -103,35 +81,32 @@
                             Use 8 or more characters with a mix of letters, numbers &
                             symbols.
                           </div>
-                          
- 
 
-
-                    <!-- id="password_data" -->
-                  </div>
-                  <div class="form-group col-md-6">
-                    <label>Confirm password</label>
-                    <input
-                      class="form-control"
-                      type="password"
-                      placeholder="Reenter your password"
-                      name="confirmPassword"
-                      id="confirmPassword"
-                      required
-                    />
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="form-group col-md-6">
-                    <label>Age</label>
-                    <input
-                      class="form-control"
-                      type="number"
-                      placeholder="Age"
-                      name="age"
-                      required
-                    />
-                    <!-- <div class="row">
+                        </div>
+                        <!-- <div class="form-group col-md-6">
+                          <label>Confirm password</label>
+                          <input class="form-control" type="password" placeholder="Reenter your password"
+                            name="confirmPassword" id="confirmPassword" required />
+                          <span class="input-group-text">
+                            <i class="fa fa-eye" id="togglePassword" style="cursor: pointer"></i>
+                          </span>
+                        </div> -->
+                        <div class="form-group col-md-6">
+                        <label>Confirm password</label>
+                        <div class="input-group">
+                          <input class="form-control" type="password" placeholder="Reenter your password"
+                            name="confirmPassword" id="confirmPassword" required aria-describedby="passwordHelp" />
+                          <span class="input-group-text">
+                            <i class="fa fa-eye" id="toggleCnfPassword" style="cursor: pointer"></i>
+                          </span>
+                        </div>
+                      </div>
+                      </div>
+                      <div class="row">
+                        <div class="form-group col-md-6">
+                          <label>Date of Birth</label>
+                          <input class="form-control" type="date" placeholder="Date of Birth" name="dob" required />
+                          <!-- <div class="row">
                       <div class="form-group col-md-6">
                         <label>Date of Birth</label>
                         <input
@@ -144,132 +119,112 @@
                         />
                       </div>
                     </div> -->
-                  </div>
-                  <div class="form-group col-md-6">
-                    <label>Gender</label>
-                    <select name="gender" class="form-control" required>
-                      <option value="male">Male</option>
-                      <option value="female">Female</option>
-                      <option value="other">Other</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="form-group col-md-6">
-                    <label>Blood Group</label>
-                    <select name="bloodGroup" class="form-control">
-                      <option value="">Don't know</option>
-                      <option value="O+">O+</option>
-                      <option value="O-">O-</option>
-                      <option value="A+">A+</option>
-                      <option value="A-">A-</option>
-                      <option value="B+">B+</option>
-                      <option value="B-">B-</option>
-                      <option value="AB+">AB+</option>
-                      <option value="AB-">AB-</option>
-                    </select>
-                  </div>
-                  <div class="form-group col-md-6">
-                    <label>Phone number</label>
-                    <input
-                      class="form-control"
-                      type="tel"
-                      placeholder="10 digit phone no"
-                      name="phone"
-                      id="phone"
-                      required
-                    />
-                  </div>
-                </div>
+                        </div>
+                        <div class="form-group col-md-6">
+                          <label>Gender</label>
+                          <select name="gender" class="form-control" required>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                            <option value="other">Other</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="form-group col-md-6">
+                          <label>Blood Group</label>
+                          <select name="bloodGroup" class="form-control">
+                            <option value="">Don't know</option>
+                            <option value="O+">O+</option>
+                            <option value="O-">O-</option>
+                            <option value="A+">A+</option>
+                            <option value="A-">A-</option>
+                            <option value="B+">B+</option>
+                            <option value="B-">B-</option>
+                            <option value="AB+">AB+</option>
+                            <option value="AB-">AB-</option>
+                          </select>
+                        </div>
+                        <div class="form-group col-md-6">
+                          <label>Phone number</label>
+                          <input class="form-control" type="tel" placeholder="10 digit phone no" name="phone" id="phone"
+                            required />
+                        </div>
+                      </div>
 
-                <button type="submit" class="btn btn-default">
-                  Create Account
-                </button>
-              </form>
-              <p class="mt-2">
-                Already have an account?
-                <a href="./login" class="text-info-emphasis"> Login here</a>
-              </p>
-            </div>
-          </div>
+                      <button type="submit" class="btn btn-default">
+                        Create Account
+                      </button>
+                    </form>
+                    <p class="mt-2">
+                      Already have an account?
+                      <a href="./login" class="text-info-emphasis"> Login here</a>
+                    </p>
+                  </div>
         </div>
       </div>
     </div>
+  </div>
 
-    <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        const confirmPasswordField = document.getElementById("confirmPassword");
-        const phoneField = document.getElementById("phone");
-        const passwordField = document.getElementById("password_data");
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const confirmPasswordField = document.getElementById("confirmPassword");
+      const phoneField = document.getElementById("phone");
+      const passwordField = document.getElementById("password_data");
+      // toggle password
+      document
+        .getElementById("togglePassword")
+        .addEventListener("click", function (e) {
+          e.preventDefault();
+          const toggleIcon = this;
+          if (passwordField.type === "password") {
+            passwordField.type = "text";
+            toggleIcon.classList.remove("fa-eye");
+            toggleIcon.classList.add("fa-eye-slash");
+          } else {
+            passwordField.type = "password";
+            toggleIcon.classList.remove("fa-eye-slash");
+            toggleIcon.classList.add("fa-eye");
+          }          
+        });
 
+        // toggle confirm password
         document
-          .getElementById("togglePassword")
-          .addEventListener("click", function (e) {
-            e.preventDefault();
-            const toggleIcon = this;
-            if (passwordField.type === "password") {
-              passwordField.type = "text";
-              toggleIcon.classList.remove("fa-eye");
-              toggleIcon.classList.add("fa-eye-slash");
-            } else {
-              passwordField.type = "password";
-              toggleIcon.classList.remove("fa-eye-slash");
-              toggleIcon.classList.add("fa-eye");
-            }
-          });
-
+        .getElementById("toggleCnfPassword")
+        .addEventListener("click", function (e) {
+          e.preventDefault();
+          const toggleIcon = this;
+          if (confirmPasswordField.type === "password") {
+            confirmPasswordField.type = "text";
+            toggleIcon.classList.remove("fa-eye");
+            toggleIcon.classList.add("fa-eye-slash");
+          } else {
+            confirmPasswordField.type = "password";
+            toggleIcon.classList.remove("fa-eye-slash");
+            toggleIcon.classList.add("fa-eye");
+          }          
+        });
+       
     document
       .getElementById("registerForm")
       .addEventListener("submit", function (event) {
-        const password = document.getElementById("password_data").value;
-
-      });
-
-      document.getElementById('togglePassword').addEventListener('click', function () {
-    const passwordField = document.getElementById('password_data');
-    const toggleIcon = document.getElementById('togglePassword');
-    
-
-    if (passwordField.type === 'password') {
-      passwordField.type = 'text';
-      toggleIcon.classList.remove('fa-eye');
-      toggleIcon.classList.add('fa-eye-slash'); 
-      passwordField.type = 'password';
-      toggleIcon.classList.remove('fa-eye-slash');
-      toggleIcon.classList.add('fa-eye'); 
-    }
-  });
-
-
-    const confirmPassword =
-      document.getElementById("confirmPassword").value;
-    const phone = document.getElementById("phone").value;
-
-    // Validate password and confirm password match
-    if (password !== confirmPassword) {
-      alert("Passwords do not match. Please try again.");
-      event.preventDefault();
-      return;
-    }
-    // Validate password and confirm password match
-    if (password !== confirmPassword) {
-      alert("Passwords do not match. Please try again.");
-      event.preventDefault();
-      return;
-    }
-
-            function validatePhone(phone) {
-              const re = /^\d{10}$/;
-              return re.test(phone);
-            }
-
-            if (!validatePhone(phoneField.value)) {
-              event.preventDefault();
-              alert("Please enter a valid phone number.");
-              return;
-            }
-          });
-      
+        // Validate password and confirm password match
+        if (passwordField.value !== confirmPasswordField.value) {
+          event.preventDefault();
+          alert("Passwords do not match. Please try again.");
+          return;
+        }
+        function validatePhone(phone) {
+          const re = /^\d{10}$/;
+          return re.test(phone);
+        }
+        if (!validatePhone(phoneField.value)) {
+          event.preventDefault();
+          alert("Please enter a valid phone number.");
+          return;
+        }
+      });//end of submit
+    }) //end of dom content loaded
+    // Validate phone number format (10 digits)
   </script>
   <script src="./scripts/passwordStrength.js"></script>
 </body>

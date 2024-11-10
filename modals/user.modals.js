@@ -25,16 +25,16 @@ const userSchema = new mongoose.Schema(
       required: [true, "Password is required"],
     },
 
-    // dob: {
-    //   type: Date,
-    //   required: [true, 'Date of Birth is required'],
-    // },
-
-    age: {
-      type: Number,
-      required: [true, "Age is required"],
-      min: [0, "Age cannot be negative"],
+    dob: {
+      type: Date,
+      required: [true, "Date of Birth is required"],
     },
+
+    // age: {
+    //   type: Number,
+    //   required: [true, "Age is required"],
+    //   min: [0, "Age cannot be negative"],
+    // },
     gender: {
       type: String,
       enum: ["male", "female", "other"],

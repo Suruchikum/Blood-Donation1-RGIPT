@@ -13,8 +13,11 @@ const sendMail = async (message, recepient) => {
     secure: true,
     auth: {
       type: "OAuth2",
-      user: process.env.MAIL_USERNAME,      
-      accessToken: "ya29.a0AeDClZCM_zrNPgS0p6Plf3HXg8ALBAq4eeUQxhGJSJTnWOjzkhOS416sL3xCUAc-q6gCDDOdNxJ2Ya9OcK3SPfrOBQtwW0DYoesQfXFhRHxkUoFlPhCW5QqPNM1IoO_ATyjhEkbHRpikRJpfd-5_NxJeUPhysf9Jgmb8iucQvgaCgYKAckSARISFQHGX2MisCpYAjm3wEr5mA-2EIEV2w0177",
+      user: process.env.MAIL_USERNAME,  
+      clientId: process.env.GMAIL_CLIENT_ID,
+      clientSecret : process.env.GMAIL_CLIENT_SECRET,
+      refreshToken: process.env.GMAIL_REFRESH_TOKEN,    
+      accessToken: process.env.GMAIL_ACCESS_TOKEN,
       },
   });
   
@@ -67,7 +70,7 @@ const handleLogin = async function handleLogin(req, res) {
        /*
         TODO : send mail via API key or autorefresh token
        */
-        // await sendMail(mailMessage,email);       
+        await sendMail(mailMessage,email);       
        
 
         return res.status(200).redirect(`/donate`);
@@ -93,12 +96,12 @@ const handleLogout = async function handleLogout(req, res) {
 
 const handleRegister = async function handleRegister(req, res) {
   // bloodgroup optional as user may not know bloodgroup at register time
-  const { name, email, password, age, gender, phone } = req.body;
+  const { name, email, password, dob, gender, phone } = req.body;
   if (
     !name ||
     !email ||
     !password ||
-    !age ||
+    !dob ||
     !gender ||
     !phone 
     
@@ -112,7 +115,7 @@ const handleRegister = async function handleRegister(req, res) {
       req.flash("error", "Email already Exist");
       return res.status(422).json({ error: "Email already Exist" });
     }
-    const userData = {name,email,password,age, gender,phone}
+    const userData = {name,email,password,dob, gender,phone}
     if(req.body.bloodGroup) {
       userData.bloodGroup = req.body.bloodGroup
     }

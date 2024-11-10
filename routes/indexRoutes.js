@@ -33,7 +33,7 @@ router.post("/register", (req, res) => {
     password,
     confirmpassword,
     phone,
-    age,
+    dob,
     gender,
     bloodGroup,
   } = req.body;
@@ -45,7 +45,7 @@ router.post("/register", (req, res) => {
     !password ||
     !confirmpassword ||
     !phone ||
-    !age ||
+    !dob ||
     !gender ||
     !bloodGroup 
   ) {
