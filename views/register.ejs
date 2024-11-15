@@ -64,7 +64,10 @@
                           <label>password</label>
                           <div class="input-group">
                             <input class="form-control" type="password" placeholder="Password" name="password"
-                              id="password_data" required aria-describedby="passwordHelp" />
+                              id="password_data" required
+                              pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$"
+                              title="Must contain 8 or more characters with a mix of letters, numbers & symbols."
+                              aria-describedby="passwordHelp" />
                             <span class="input-group-text">
                               <i class="fa fa-eye" id="togglePassword" style="cursor: pointer"></i>
                             </span>
@@ -83,42 +86,27 @@
                           </div>
 
                         </div>
-                        <!-- <div class="form-group col-md-6">
-                          <label>Confirm password</label>
-                          <input class="form-control" type="password" placeholder="Reenter your password"
-                            name="confirmPassword" id="confirmPassword" required />
-                          <span class="input-group-text">
-                            <i class="fa fa-eye" id="togglePassword" style="cursor: pointer"></i>
-                          </span>
-                        </div> -->
+
+
+
+
+
                         <div class="form-group col-md-6">
-                        <label>Confirm password</label>
-                        <div class="input-group">
-                          <input class="form-control" type="password" placeholder="Reenter your password"
-                            name="confirmPassword" id="confirmPassword" required aria-describedby="passwordHelp" />
-                          <span class="input-group-text">
-                            <i class="fa fa-eye" id="toggleCnfPassword" style="cursor: pointer"></i>
-                          </span>
+                          <label>Confirm password</label>
+                          <div class="input-group">
+                            <input class="form-control" type="password" placeholder="Re-Enter your password"
+                              name="confirmPassword" id="confirmPassword" required aria-describedby="passwordHelp" />
+                            <span class="input-group-text">
+                              <i class="fa fa-eye" id="toggleCnfPassword" style="cursor: pointer"></i>
+                            </span>
+                          </div>
                         </div>
-                      </div>
                       </div>
                       <div class="row">
                         <div class="form-group col-md-6">
                           <label>Date of Birth</label>
                           <input class="form-control" type="date" placeholder="Date of Birth" name="dob" required />
-                          <!-- <div class="row">
-                      <div class="form-group col-md-6">
-                        <label>Date of Birth</label>
-                        <input
-                          id="dob"
-                          class="form-control"
-                          type="date"
-                          name="dob"
-                          placeholder="Enter Date of Birth"
-                          required
-                        />
-                      </div>
-                    </div> -->
+
                         </div>
                         <div class="form-group col-md-6">
                           <label>Gender</label>
@@ -146,8 +134,10 @@
                         </div>
                         <div class="form-group col-md-6">
                           <label>Phone number</label>
+                          <!-- phone no should be all digits and not start with 0 and of length 10 -->
                           <input class="form-control" type="tel" placeholder="10 digit phone no" name="phone" id="phone"
-                            required />
+                            required pattern="^[1-9][0-9]{9}$" title="Must be 10 digit number" />
+
                         </div>
                       </div>
 
@@ -170,7 +160,7 @@
       const confirmPasswordField = document.getElementById("confirmPassword");
       const phoneField = document.getElementById("phone");
       const passwordField = document.getElementById("password_data");
-      // toggle password
+      // // toggle password
       document
         .getElementById("togglePassword")
         .addEventListener("click", function (e) {
@@ -184,11 +174,16 @@
             passwordField.type = "password";
             toggleIcon.classList.remove("fa-eye-slash");
             toggleIcon.classList.add("fa-eye");
-          }          
+          }
         });
 
-        // toggle confirm password
-        document
+
+
+
+
+
+      // toggle confirm password
+      document
         .getElementById("toggleCnfPassword")
         .addEventListener("click", function (e) {
           e.preventDefault();
@@ -201,30 +196,31 @@
             confirmPasswordField.type = "password";
             toggleIcon.classList.remove("fa-eye-slash");
             toggleIcon.classList.add("fa-eye");
-          }          
+          }
         });
-       
-    document
-      .getElementById("registerForm")
-      .addEventListener("submit", function (event) {
-        // Validate password and confirm password match
-        if (passwordField.value !== confirmPasswordField.value) {
-          event.preventDefault();
-          alert("Passwords do not match. Please try again.");
-          return;
-        }
-        function validatePhone(phone) {
-          const re = /^\d{10}$/;
-          return re.test(phone);
-        }
-        if (!validatePhone(phoneField.value)) {
-          event.preventDefault();
-          alert("Please enter a valid phone number.");
-          return;
-        }
-      });//end of submit
+
+      document
+        .getElementById("registerForm")
+        .addEventListener("submit", function (event) {
+          // Validate password and confirm password match
+          if (passwordField.value !== confirmPasswordField.value) {
+            event.preventDefault();
+            alert("Passwords do not match. Please try again.");
+            return;
+          }
+          function validatePhone(phone) {
+            const re = /^\d{10}$/;
+            return re.test(phone);
+          }
+          if (!validatePhone(phoneField.value)) {
+            event.preventDefault();
+            alert("Please enter a valid phone number.");
+            return;
+          }
+        });//end of submit
     }) //end of dom content loaded
     // Validate phone number format (10 digits)
+
   </script>
   <script src="./scripts/passwordStrength.js"></script>
 </body>

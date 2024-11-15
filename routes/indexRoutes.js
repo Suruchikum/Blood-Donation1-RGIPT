@@ -3,7 +3,11 @@ const router = express.Router();
 const User = require("../modals/user.modals");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
-const { someControllerFunction } = require("../controllers/indexController");
+const {
+  someControllerFunction,
+  displayDonors,
+  dateFormat,
+} = require("../controllers/indexController");
 const authMiddleware = require("../middleware/authMiddleware");
 
 const {
@@ -16,7 +20,9 @@ const {
 router.get("/login", (req, res) => {
   res.render("login");
 });
-
+// router.get("/data", (req, res) => {
+//   res.render("data");
+// });
 router.get("/logout", handleLogout);
 
 router.get("/register", (req, res) => {
@@ -47,7 +53,7 @@ router.post("/register", (req, res) => {
     !phone ||
     !dob ||
     !gender ||
-    !bloodGroup 
+    !bloodGroup
   ) {
     errors.push({ message: "Please fill in all fields!" });
   }
@@ -97,7 +103,13 @@ router.post("/register", (req, res) => {
   }
 });
 
+router.get("/donors", (req, res) => {
+  res.render("donors", { donors: [] });
+});
 router.post("/donate", someControllerFunction);
 // Exporting the controller function
+
+// router to display all user data
+router.get("/all-donors", displayDonors);
 
 module.exports = router;

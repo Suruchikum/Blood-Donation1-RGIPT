@@ -12,6 +12,7 @@ oauth2Client.setCredentials({
 const getAccessToken = async () => {
   try {
     const res = await oauth2Client.getAccessToken();
+    // console.log('Generated Access token=>',res)
     return res?.token || null;
   } catch (error) {
     console.error("Error getting access token:", error);
