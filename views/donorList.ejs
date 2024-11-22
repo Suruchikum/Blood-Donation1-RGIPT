@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blood Request Form</title>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+
+    <!-- Font Icon -->
+    <link href="/fa/font-awesome.css" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+    <div class="container mt-5">
+        <h2 class="text-center">Blood Request Form</h2>
+        <form id="bloodRequestForm">
+            <div class="mb-3">
+                <label for="patientName" class="form-label">Patient Name</label>
+                <input type="text" class="form-control" id="patientName" name="patientName" required>
+            </div>
+            <div class="mb-3">
+                <label for="guardianName" class="form-label">Guardian Name</label>
+                <input type="text" class="form-control" id="guardianName" name="guardianName" required>
+            </div>
+            <div class="mb-3">
+                <label for="contactNo" class="form-label">Contact No</label>
+                <input type="tel" class="form-control" id="contactNo" name="contactNo" required>
+            </div>
+            <div class="mb-3">
+                <label for="hospitalName" class="form-label">Hospital Name</label>
+                <input type="text" class="form-control" id="hospitalName" name="hospitalName" required>
+            </div>
+            <div class="mb-3">
+                <label for="hospitalAddress" class="form-label">Hospital Address</label>
+                <textarea class="form-control" id="hospitalAddress" name="hospitalAddress" rows="3" required></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="bloodGroup" class="form-label">Required Blood Group</label>
+                <select class="form-select" id="bloodGroup" name="bloodGroup" required>
+                    <option value="" disabled selected>Select Blood Group</option>
+                    <option value="A+">A+</option>
+                    <option value="A-">A-</option>
+                    <option value="B+">B+</option>
+                    <option value="B-">B-</option>
+                    <option value="AB+">AB+</option>
+                    <option value="AB-">AB-</option>
+                    <option value="O+">O+</option>
+                    <option value="O-">O-</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="prescription" class="form-label">Upload Doctor Prescription (Optional)</label>
+                <input type="file" class="form-control" id="prescription" name="prescription">
+            </div>
+            <button type="submit" class="btn btn-primary">Submit Request</button>
+        </form>
+        <div id="donorResults" class="mt-5"></div>
+    </div>
+    <script>
+        document.getElementById('bloodRequestForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+
+            const response = await fetch('/submit-blood-request', {
+                method: 'POST',
+                body: formData
+            });
+            const data = await response.json();
+
+            const resultsContainer = document.getElementById('donorResults');
+            if (data.success && data.donors.length) {
+                resultsContainer.innerHTML = `
+                    <h3>Available Donors</h3>
+                    <ul class="list-group">
+                        ${data.donors.map(donor => `
+                            <li class="list-group-item">
+                                <strong>Name:</strong> ${donor.name} <br>
+                                <strong>Phone:</strong> ${donor.phone} <br>
+                                <strong>Blood Group:</strong> ${donor.bloodGroup}
+                            </li>
+                        `).join('')}
+                    </ul>
+                `;
+            } else {
+                resultsContainer.innerHTML = '<p class="text-danger">No donors available for the required blood group.</p>';
+            }
+        });
+    </script>
+
+    <script src="js/bootstrap.min.js"></script>
+</body>
+
+</html>

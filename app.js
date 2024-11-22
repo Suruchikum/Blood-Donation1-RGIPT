@@ -10,6 +10,10 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const sendMail = require("./controllers/indexController").sendMail;
 const displayDonors = require("./controllers/indexController").displayDonors;
+const submitBloodRequest =
+  require("./controllers/indexController").submitBloodRequest;
+const multer = require("multer");
+const Donor = require("./modals/donor.modals");
 
 const mongoose = require("mongoose");
 const User = require("./modals/user.modals");
@@ -25,7 +29,7 @@ const indexRoutes = require("./routes/indexRoutes");
 const staticpath = path.join(__dirname, "../RGIPT Blood Donation");
 
 const app = express();
-
+const recipient = multer({ dest: "recepient/" });
 // establish session
 
 app.use(cookieParser());
@@ -70,6 +74,9 @@ app.get("/index", (req, res) => {
 
 app.get("/data", (req, res) => {
   res.render("data");
+});
+app.get("/donorList", (req, res) => {
+  res.render("donorList");
 });
 
 app.get("/donate", verifyToken, (req, res) => {

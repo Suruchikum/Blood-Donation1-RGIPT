@@ -4,7 +4,8 @@ const jwt = require("jsonwebtoken");
 const secret = process.env.SECRET_KEY;
 const { sendMail } = require("../config/gmail");
 const formatDate = require("../util/dateFormat");
-// const { getDonors } = require("../util/dateFormat");
+const upload = require("../config/multerConfig");
+const Donor = require("../modals/donor.modals"); // Adjust the path as needed
 
 const handleLogin = async function handleLogin(req, res) {
   try {
@@ -177,7 +178,23 @@ const getDonors = (req, res) => {
     res.status(500).send("Internal Server Error");
   }
 };
+const submitBloodRequest = async (req, res) => {
+  try {
+    const { bloodGroup, name, contact } = req.body;
+    const file = req.file; // This contains details of the uploaded file
 
+    console.log("Uploaded file:", file);
+
+    // Logic to find active donors with matching blood group
+    const donors = await Donor.find({ bloodGroup, status: "active" });
+
+    // Render donor list with available donors
+    res.render("donorList", { donors });
+  } catch (error) {
+    console.error("Error processing blood request:", error.message);
+    res.status(500).send("Internal Server Error");
+  }
+};
 module.exports = {
   handleLogin,
   handleRegister,
@@ -186,4 +203,5 @@ module.exports = {
   sendMail,
   displayDonors,
   getDonors,
+  submitBloodRequest,
 };

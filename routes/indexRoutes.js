@@ -3,10 +3,12 @@ const router = express.Router();
 const User = require("../modals/user.modals");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
+const upload = require("../config/multerConfig");
 const {
   someControllerFunction,
   displayDonors,
   dateFormat,
+  submitBloodRequest,
 } = require("../controllers/indexController");
 const authMiddleware = require("../middleware/authMiddleware");
 
@@ -107,9 +109,15 @@ router.get("/donors", (req, res) => {
   res.render("donors", { donors: [] });
 });
 router.post("/donate", someControllerFunction);
+router.post(
+  "/submit-blood-request",
+  upload.single("prescription"),
+  submitBloodRequest
+);
 // Exporting the controller function
 
 // router to display all user data
 router.get("/all-donors", displayDonors);
+router.get("/submit-blood-request", submitBloodRequest);
 
 module.exports = router;
